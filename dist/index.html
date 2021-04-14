@@ -4,12 +4,61 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do List</title>
+  <title>TODO - To do list</title>
   <link rel="stylesheet" href="css/modern-normalize.min.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fontawesome.min.css">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap">
 </head>
 <body>
+  <header>
+    <p class="logo">TODO</p>
+  </header>
 
+  <div class="sidebar">
+    <div class="sidebar-project-nav">
+      <a class="active" href="#"><i class="far fa-inbox fa-fw"></i>Inbox</a>
+      <a href="#"><i class="far fa-calendar-day fa-fw"></i>Today</a>
+      <a href="#"><i class="far fa-calendar-week fa-fw"></i>Next 7 days</a>
+      <a href="#"><i class="far fa-calendar-star fa-fw"></i>Important</a>
+      <a href="#"><i class="far fa-check-square fa-fw"></i>Completed</a>
+    </div>
+
+    <div class="sidebar-projects">
+      <p class="sidebar-projects-title">Projects <span class="sidebar-new-project"><i class="far fa-plus"></i></span></p>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-projects-list">
+        <a class="active" href="#"><i class="far fa-circle fa-fw"></i>Home</a>
+        <a href="#"><i class="far fa-circle fa-fw"></i>Work</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="todo-header">
+      <h1>Inbox (Home)</h1>
+    </div>
+
+    <div>
+      <div class="todo-item">
+        <i class="far fa-circle fa-fw todo-item-icon"></i>
+        <p class="todo-item-title">Do chores</p>
+        <p>2020-04-20</p>
+      </div>
+      <div class="todo-item done">
+        <i class="far fa-check-circle fa-fw todo-item-icon"></i>
+        <p class="todo-item-title done">Make appointments</p>
+        <p>2020-04-20</p>
+      </div>
+      <div class="todo-item-add">
+        <i class="far fa-plus fa-fw todo-item-icon"></i>
+        <p class="todo-item-title">Add new item</p>
+      </div>
+    </div>
+
+  </main>
 
   <script src="main.js"></script>
 </body>
