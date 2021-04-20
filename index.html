@@ -17,48 +17,166 @@
     <p class="logo">TODO</p>
   </header>
 
-  <div class="sidebar">
+  <nav class="sidebar">
     <div class="sidebar-project-nav">
-      <a class="active" href="#"><i class="far fa-inbox fa-fw"></i>Inbox</a>
-      <a href="#"><i class="far fa-calendar-day fa-fw"></i>Today</a>
-      <a href="#"><i class="far fa-calendar-week fa-fw"></i>Next 7 days</a>
-      <a href="#"><i class="far fa-calendar-star fa-fw"></i>Important</a>
-      <a href="#"><i class="far fa-check-square fa-fw"></i>Completed</a>
+      <a class="sidebar-link active" href="#">
+        <i class="far fa-inbox fa-fw sidebar-link"></i>Inbox
+      </a>
+      <a class="sidebar-link" href="#">
+        <i class="far fa-calendar-day fa-fw sidebar-link"></i>Today
+      </a>
+      <a class="sidebar-link" href="#">
+        <i class="far fa-calendar-week fa-fw sidebar-link"></i>Next 7 days
+      </a>
+      <a class="sidebar-link" href="#">
+        <i class="far fa-calendar-star fa-fw sidebar-link"></i>Important
+      </a>
+      <a class="sidebar-link" href="#">
+        <i class="far fa-check-double fa-fw sidebar-link"></i>Completed
+      </a>
     </div>
 
     <div class="sidebar-projects">
-      <p class="sidebar-projects-title">Projects <span class="sidebar-new-project"><i class="far fa-plus"></i></span></p>
+      <p class="sidebar-projects-title">Projects
+        <i class="far fa-plus add-project-modal"></i>
+      </p>
       <div class="sidebar-sep"></div>
       <div class="sidebar-projects-list">
-        <a class="active" href="#"><i class="far fa-circle fa-fw"></i>Home</a>
-        <a href="#"><i class="far fa-circle fa-fw"></i>Work</a>
+        <a class="sidebar-project active" href="#"><i class="far fa-circle fa-fw"></i>Home
+          <i class="far fa-trash remove-project-modal"></i>
+          <i class="far fa-edit edit-project-modal"></i>
+        </a>
+        <a class="sidebar-project" href="#"><i class="far fa-circle fa-fw"></i>Work
+          <i class="far fa-trash remove-project-modal"></i>
+          <i class="far fa-edit edit-project-modal"></i>
+        </a>
       </div>
     </div>
-  </div>
+  </nav>
 
   <main>
     <div class="todo-header">
-      <h1>Inbox (Home)</h1>
+      <h1>
+        <span class="todo-header-nav">Inbox</span> (<span class="todo-header-project">Home</span>)
+      </h1>
     </div>
 
     <div>
-      <div class="todo-item">
-        <i class="far fa-circle fa-fw todo-item-icon"></i>
-        <p class="todo-item-title">Do chores</p>
-        <p>2020-04-20</p>
+      <div class="todo-item toggle-task">
+        <i class="far fa-circle fa-fw toggle-task"></i>
+        <p class="todo-item-title toggle-task">Do chores</p>
+        <p class="todo-item-date toggle-task">2020-04-20</p>
+        <i class="far fa-edit fa-fw edit-task-modal"></i>
+        <i class="far fa-trash fa-fw todo-item-remove remove-task"></i>
       </div>
-      <div class="todo-item done">
-        <i class="far fa-check-circle fa-fw todo-item-icon"></i>
-        <p class="todo-item-title done">Make appointments</p>
-        <p>2020-04-20</p>
+      <div class="todo-item toggle-task">
+        <i class="far fa-check-circle fa-fw toggle-task"></i>
+        <p class="todo-item-title toggle-task done">Make appointments</p>
+        <p class="todo-item-date toggle-task">2020-04-20</p>
+        <i class="far fa-edit fa-fw edit-task-modal"></i>
+        <i class="far fa-trash fa-fw todo-item-remove remove-task"></i>
       </div>
-      <div class="todo-item-add">
-        <i class="far fa-plus fa-fw todo-item-icon"></i>
-        <p class="todo-item-title">Add new item</p>
+      <div class="todo-item-add add-task-modal">
+        <i class="far fa-plus fa-fw add-task-modal"></i>
+        <p class="todo-item-title add-task-modal">Add new task</p>
       </div>
     </div>
-
   </main>
+
+  <!-- Add project modal -->
+  <div id="add-project-modal" class="modal hide">
+    <div class="modal-box">
+      <div class="modal-header">
+        <i class="close close-x far fa-times"></i>
+        <h2>New project</h2>
+      </div>
+      <div class="modal-content">
+        <form id="add-project-form" name="add-project-form" method="POST">
+
+          <div>
+            <label for="form-project-title">Project title</label>
+            <input type="text" id="form-project-title" name="project-title" autocomplete="off" placeholder="e.g. Vacation">
+            <p class="name-error">This field can't be empty.</p>
+          </div>
+
+          <div>
+            <label for="form-project-icon">Project icon</label>
+            <div class="add-project-icons">
+              <div class="project-icon">
+                <i class="far fa-circle fa-fw project-icon"></i>
+              </div>
+              <div class="project-icon">
+                <i class="far fa-home fa-fw project-icon"></i>
+              </div>
+              <div class="project-icon">
+                <i class="far fa-building fa-fw project-icon"></i>
+              </div>
+              <div class="project-icon">
+                <i class="far fa-graduation-cap fa-fw project-icon"></i>
+              </div>
+              <div class="project-icon">
+                <i class="far fa-hiking fa-fw project-icon"></i>
+              </div>
+              <div class="project-icon">
+                <i class="far fa-pencil-alt fa-fw project-icon"></i>
+              </div>
+              <div class="project-icon">
+                <i class="far fa-paint-brush-alt fa-fw project-icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="form-project-color">Project color</label>
+            <div class="add-project-colors">
+              <div class="project-color">
+                <i class="far fa-circle fa-fw app-green project-color"></i>
+              </div>
+              <div class="project-color">
+                <i class="far fa-circle fa-fw app-yellow project-color"></i>
+              </div>
+              <div class="project-color">
+                <i class="far fa-circle fa-fw app-red project-color"></i>
+              </div>
+              <div class="project-color">
+                <i class="far fa-circle fa-fw app-grey project-color"></i>
+              </div>
+              <div class="project-color">
+                <i class="far fa-circle fa-fw app-light-grey project-color"></i>
+              </div>
+              <div class="project-color">
+                <i class="far fa-circle fa-fw app-blue project-color"></i>
+              </div>
+              <div class="project-color">
+                <i class="far fa-circle fa-fw app-light-blue project-color"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div>
+            <label class="checkbox">
+              <span class="checkbox-input">
+                <input type="checkbox" id="form-book-status" name="book-status" autocomplete="off">
+                <span class="checkbox-control">
+                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                    <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                </span>
+              </span>
+              Text here
+            </label>
+          </div> -->
+
+          <div class="modal-sep"></div>
+
+          <div class="button-right">
+            <button class="close cancel" type="button">Cancel</button><button id="add-project" type="submit" href="#">Add</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- /Add project modal -->
 
   <script src="main.js"></script>
 </body>
