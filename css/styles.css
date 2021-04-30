@@ -88,7 +88,7 @@ header {
 }
 
 .sidebar-project-nav i,
-.sidebar-projects-list i  {
+.sidebar-projects-list i:not(.remove-project-modal) {
   margin-right: 10px;
 }
 
@@ -220,11 +220,14 @@ main {
   margin-bottom: 20px;
 }
 
+#add-project-form > label {
+  margin-bottom: 6px;
+}
+
 #form-project-title {
   width: 100%;
   height: 40px;
   padding: 0 12px;
-  margin-top: 6px;
   border: solid 1px rgba(0,0,0,.15);
   border-radius: 8px;
   background-color: var(--white);
@@ -238,40 +241,69 @@ main {
   transition: all .3s;
 }
 
-.add-project-icons,
-.add-project-colors {
-  display: flex;
-  flex-direction: row;
-  margin-top: 6px;
-  font-size: 28px;
+#project-title-label {
+  display: inline-block;
+  margin-bottom: 6px;
 }
 
-.add-project-icons div,
-.add-project-colors div {
-  padding: 4px 4px 1px;
-  border-radius: 8px;
-  background-color: var(--light-grey);
-  margin-right: 10px;
-  border: 1px solid var(--light-grey);
-  transition: all .2s;
+/* Form errors */
+.title-error {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--primary-red);
+}
+
+/* Radio buttons styling */
+
+.form-radio > p {
+  margin-bottom: 6px;
+}
+
+#project-icons,
+#project-colors {
+  display: grid;
+  grid-template-columns: repeat(7, -webkit-min-content);
+  grid-template-columns: repeat(7, min-content);
+  grid-gap: 10px;
+}
+
+.radio {
+  font-size: 28px;
+  color: var(--grey);
   cursor: pointer;
 }
 
-.add-project-icons div:hover:not(.active),
-.add-project-colors div:hover:not(.active) {
-  border: 1px solid var(--grey);
-  transition: all .2s;
+#project-icons input,
+#project-colors input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.add-project-icons div.active,
-.add-project-colors div.active {
+#project-icons input:focus + .radio-control,
+#project-colors input:focus + .radio-control {
   border: 1px solid var(--grey);
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
-.add-project-icons > div:last-child,
-.add-project-colors > div:last-child {
-  margin-right: 0;
+.radio-before input:checked + .radio-control {
+  border: 1px solid var(--grey);
+  transition: all 0.2s;
+}
+
+.radio-control:hover {
+  border: 1px solid var(--grey);
+  transition: all 0.2s;
+}
+
+.radio-control {
+  display: block;
+  padding: 4px 4px 1px;
+  border-radius: 8px;
+  background-color: var(--light-grey);
+  border: 1px solid var(--light-grey);
+  transition: all 0.2s;
 }
 
 .modal-sep {
@@ -316,58 +348,6 @@ main {
 .cancel:hover {
   background-color: var(--light-grey);
 }
-
-/* Form errors */
-.name-error {
-  display: none;
-  margin: 6px 0 0;
-  font-size: 14px;
-  color: var(--primary-red);
-}
-
-/*  Checkbox styling */
-/* .checkbox {
-  display: grid;
-  grid-template-columns: min-content auto;
-  grid-gap: 6px;
-}
-
-.checkbox-input input {
-  opacity: 0;
-  width: 1em;
-  height: 1em;
-}
-
-.checkbox-control {
-  display: inline-grid;
-  align-self: center;
-  width: 1em;
-  height: 1em;
-  border-radius: 2px;
-  border: solid 2px rgba(0,0,0,.15);
-}
-
-.checkbox-input {
-  display: grid;
-  grid-template-areas: "checkbox";
-}
-
-.checkbox-input > * {
-  grid-area: checkbox;
-}
-
-.checkbox-control svg {
-  opacity: 0;
-}
-
-.checkbox-input input:checked + .checkbox-control svg {
-  opacity: 1;
-}
-
-.checkbox-input input:focus + .checkbox-control {
-  border-color: var(--grey);
-} */
-
 
 
 /* Responsive  WIP */
