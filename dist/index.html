@@ -94,77 +94,106 @@
         <form id="add-project-form" name="add-project-form" method="POST">
 
           <div>
-            <label for="form-project-title">Project title</label>
+            <label id="project-title-label" for="form-project-title">Project title</label>
             <input type="text" id="form-project-title" name="project-title" autocomplete="off" placeholder="e.g. Vacation">
-            <p class="name-error">This field can't be empty.</p>
+            <p class="title-error hide">This field can't be empty.</p>
           </div>
 
-          <div>
-            <label for="form-project-icon">Project icon</label>
-            <div class="add-project-icons">
-              <div class="project-icon">
-                <i class="far fa-circle fa-fw project-icon"></i>
-              </div>
-              <div class="project-icon">
-                <i class="far fa-home fa-fw project-icon"></i>
-              </div>
-              <div class="project-icon">
-                <i class="far fa-building fa-fw project-icon"></i>
-              </div>
-              <div class="project-icon">
-                <i class="far fa-graduation-cap fa-fw project-icon"></i>
-              </div>
-              <div class="project-icon">
-                <i class="far fa-hiking fa-fw project-icon"></i>
-              </div>
-              <div class="project-icon">
-                <i class="far fa-pencil-alt fa-fw project-icon"></i>
-              </div>
-              <div class="project-icon">
-                <i class="far fa-paint-brush-alt fa-fw project-icon"></i>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label for="form-project-color">Project color</label>
-            <div class="add-project-colors">
-              <div class="project-color">
-                <i class="far fa-circle fa-fw app-green project-color"></i>
-              </div>
-              <div class="project-color">
-                <i class="far fa-circle fa-fw app-yellow project-color"></i>
-              </div>
-              <div class="project-color">
-                <i class="far fa-circle fa-fw app-red project-color"></i>
-              </div>
-              <div class="project-color">
-                <i class="far fa-circle fa-fw app-grey project-color"></i>
-              </div>
-              <div class="project-color">
-                <i class="far fa-circle fa-fw app-light-grey project-color"></i>
-              </div>
-              <div class="project-color">
-                <i class="far fa-circle fa-fw app-blue project-color"></i>
-              </div>
-              <div class="project-color">
-                <i class="far fa-circle fa-fw app-light-blue project-color"></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- <div>
-            <label class="checkbox">
-              <span class="checkbox-input">
-                <input type="checkbox" id="form-book-status" name="book-status" autocomplete="off">
-                <span class="checkbox-control">
-                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
-                    <path fill='none' stroke='currentColor' stroke-width='3' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+          <div class="form-radio">
+            <p>Project icon</p>
+            <div id="project-icons">
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-circle" name="project-icon" value="project-circle" checked>
+                  <span class="radio-control"><i class="far fa-circle fa-fw"></i></span>
                 </span>
-              </span>
-              Text here
-            </label>
-          </div> -->
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-home" name="project-icon" value="project-home">
+                  <span class="radio-control"><i class="far fa-home fa-fw"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-building" name="project-icon" value="project-building">
+                  <span class="radio-control"><i class="far fa-building fa-fw"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-graduation-cap" name="project-icon" value="project-graduation-cap">
+                  <span class="radio-control"><i class="far fa-graduation-cap fa-fw"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-hiking" name="project-icon" value="project-hiking">
+                  <span class="radio-control"><i class="far fa-hiking fa-fw"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-pencil" name="project-icon" value="project-pencil">
+                  <span class="radio-control"><i class="far fa-pencil-alt fa-fw"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-paint-brush" name="project-icon" value="project-paint-brush">
+                  <span class="radio-control"><i class="far fa-paint-brush-alt fa-fw"></i></span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-radio">
+            <p>Project color</p>
+            <div id="project-colors">
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-green" name="project-color" value="project-green" checked>
+                  <span class="radio-control"><i class="far fa-circle fa-fw app-green"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-yellow" name="project-color" value="project-yellow">
+                  <span class="radio-control"><i class="far fa-circle fa-fw app-yellow"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-red" name="project-color" value="project-red">
+                  <span class="radio-control"><i class="far fa-circle fa-fw app-red"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-grey" name="project-color" value="project-grey">
+                  <span class="radio-control"><i class="far fa-circle fa-fw app-grey"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-light-grey" name="project-color" value="project-light-grey">
+                  <span class="radio-control"><i class="far fa-circle fa-fw app-light-grey"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-blue" name="project-color" value="project-blue">
+                  <span class="radio-control"><i class="far fa-circle fa-fw app-blue"></i></span>
+                </span>
+              </label>
+              <label class="radio radio-before">
+                <span class="radio-input">
+                  <input type="radio" id="project-light-blue" name="project-color" value="project-light-blue">
+                  <span class="radio-control"><i class="far fa-circle fa-fw app-light-blue"></i></span>
+                </span>
+              </label>
+            </div>
+          </div>
 
           <div class="modal-sep"></div>
 

@@ -1,3 +1,4 @@
+import validation from './validation';
 import dom from './dom';
 
 const handlers = (() => {
@@ -13,13 +14,7 @@ const handlers = (() => {
         dom.activeProject(e.target);
       // Add project modal open
       } else if (e.target.classList.contains('add-project-modal')) {
-        dom.showModal(dom.addProjectModal);
-      // Add project icon
-      } else if (e.target.classList.contains('project-icon')) {
-        dom.activeProjectIcon(e.target);
-      // Add project color
-      } else if (e.target.classList.contains('project-color')) {
-        dom.activeProjectColor(e.target);
+        dom.showElement(dom.addProjectModal);
       // Edit project modal open
       } else if (e.target.classList.contains('edit-project-modal')) {
         console.log('Edit Project Modal');
@@ -38,11 +33,11 @@ const handlers = (() => {
         // dom.showModal(dom.editTaskModal);
       // Close all modals
       } else if (e.target.classList.contains('close') || e.target.classList.contains('modal')) {
-        dom.hideModal(dom.addProjectModal);
+        dom.hideElement(dom.addProjectModal);
       // Add project
       } else if (e.target.id === 'add-project') {
-        console.log('Add project');
         e.preventDefault();
+        validation.formValidation();
       // Remove project
       } else if (e.target.classList.contains('remove-project')) {
         console.log('Remove Project');
@@ -59,7 +54,7 @@ const handlers = (() => {
   function keyboardHandler() {
     document.addEventListener('keyup', (event) => {
       if (event.key === 'Escape') {
-        dom.hideModal(dom.addProjectModal);
+        dom.hideElement(dom.addProjectModal);
       }
       // if (event.key === 'Enter' && modal.style.display === 'block') {
       //   formValidation(event);
