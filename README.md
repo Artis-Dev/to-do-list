@@ -1,4 +1,4 @@
-# Rock Paper Scissors game
+# To Do List
 
 Project to create **To Do list** app using Vanilla JS, CSS and HTML
 
