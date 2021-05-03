@@ -5,13 +5,13 @@
   --white: #FFFFFF;
   --light-grey: #F6F5F8;
   /* App colors */
-  --app-green: #BADBCC;
-  --app-red: #F5C2C7;
-  --app-yellow: #FFECB5;
-  --app-grey: #BCBEBF;
-  --app-light-grey: #D3D6D8;
-  --app-blue: #B6D4FE;
-  --app-light-blue: #B6EFFB;
+  --project-green: #BADBCC;
+  --project-red: #F5C2C7;
+  --project-yellow: #FFECB5;
+  --project-grey: #BCBEBF;
+  --project-light-grey: #D3D6D8;
+  --project-blue: #B6D4FE;
+  --project-light-blue: #B6EFFB;
 }
 
 body {
@@ -25,13 +25,13 @@ p, h1 { margin: 0; }
 .hide { display: none; }
 .display { display: block; }
 
-.app-green { color: var(--app-green); }
-.app-red { color: var(--app-red); }
-.app-yellow { color: var(--app-yellow); }
-.app-grey { color: var(--app-grey); }
-.app-light-grey { color: var(--app-light-grey); }
-.app-blue { color: var(--app-blue); }
-.app-light-blue { color: var(--app-light-blue); }
+.project-green { color: var(--project-green); }
+.project-red { color: var(--project-red); }
+.project-yellow { color: var(--project-yellow); }
+.project-grey { color: var(--project-grey); }
+.project-light-grey { color: var(--project-light-grey); }
+.project-blue { color: var(--project-blue); }
+.project-light-blue { color: var(--project-light-blue); }
 
 /* Header */
 header {
@@ -226,7 +226,7 @@ main {
 
 #form-project-title {
   width: 100%;
-  height: 40px;
+  height: 45px;
   padding: 0 12px;
   border: solid 1px rgba(0,0,0,.15);
   border-radius: 8px;
@@ -316,8 +316,7 @@ main {
 }
 
 /* Buttons styling */
-#add-project,
-.cancel {
+.button {
   border: solid 1px rgba(0,0,0,.15);
   padding: 8px 12px;
   cursor: pointer;
@@ -326,17 +325,18 @@ main {
   transition: all .3s;
 }
 
-#add-project:hover,
-.cancel:hover {
+.button:hover {
   transition: all .3s;
 }
 
-#add-project {
+#add-project,
+#remove-project {
   background-color: var(--primary-red);
   margin-left: 20px;
 }
 
-#add-project:hover {
+#add-project:hover
+#remove-project:hover {
   background-color: var(--primary-red);
 }
 
