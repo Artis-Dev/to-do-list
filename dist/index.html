@@ -104,43 +104,43 @@
             <div id="project-icons">
               <label class="radio radio-before">
                 <span class="radio-input">
-                  <input type="radio" id="project-circle" name="project-icon" value="project-circle" checked>
+                  <input type="radio" id="project-circle" name="project-icon" value="fa-circle" checked>
                   <span class="radio-control"><i class="far fa-circle fa-fw"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
-                  <input type="radio" id="project-home" name="project-icon" value="project-home">
+                  <input type="radio" id="project-home" name="project-icon" value="fa-home">
                   <span class="radio-control"><i class="far fa-home fa-fw"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
-                  <input type="radio" id="project-building" name="project-icon" value="project-building">
+                  <input type="radio" id="project-building" name="project-icon" value="fa-building">
                   <span class="radio-control"><i class="far fa-building fa-fw"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
-                  <input type="radio" id="project-graduation-cap" name="project-icon" value="project-graduation-cap">
+                  <input type="radio" id="project-graduation-cap" name="project-icon" value="fa-graduation-cap">
                   <span class="radio-control"><i class="far fa-graduation-cap fa-fw"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
-                  <input type="radio" id="project-hiking" name="project-icon" value="project-hiking">
+                  <input type="radio" id="project-hiking" name="project-icon" value="fa-hiking">
                   <span class="radio-control"><i class="far fa-hiking fa-fw"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
-                  <input type="radio" id="project-pencil" name="project-icon" value="project-pencil">
+                  <input type="radio" id="project-pencil" name="project-icon" value="fa-pencil-alt">
                   <span class="radio-control"><i class="far fa-pencil-alt fa-fw"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
-                  <input type="radio" id="project-paint-brush" name="project-icon" value="project-paint-brush">
+                  <input type="radio" id="project-paint-brush" name="project-icon" value="fa-paint-brush-alt">
                   <span class="radio-control"><i class="far fa-paint-brush-alt fa-fw"></i></span>
                 </span>
               </label>
@@ -153,43 +153,43 @@
               <label class="radio radio-before">
                 <span class="radio-input">
                   <input type="radio" id="project-green" name="project-color" value="project-green" checked>
-                  <span class="radio-control"><i class="far fa-circle fa-fw app-green"></i></span>
+                  <span class="radio-control"><i class="far fa-circle fa-fw project-green"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
                   <input type="radio" id="project-yellow" name="project-color" value="project-yellow">
-                  <span class="radio-control"><i class="far fa-circle fa-fw app-yellow"></i></span>
+                  <span class="radio-control"><i class="far fa-circle fa-fw project-yellow"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
                   <input type="radio" id="project-red" name="project-color" value="project-red">
-                  <span class="radio-control"><i class="far fa-circle fa-fw app-red"></i></span>
+                  <span class="radio-control"><i class="far fa-circle fa-fw project-red"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
                   <input type="radio" id="project-grey" name="project-color" value="project-grey">
-                  <span class="radio-control"><i class="far fa-circle fa-fw app-grey"></i></span>
+                  <span class="radio-control"><i class="far fa-circle fa-fw project-grey"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
                   <input type="radio" id="project-light-grey" name="project-color" value="project-light-grey">
-                  <span class="radio-control"><i class="far fa-circle fa-fw app-light-grey"></i></span>
+                  <span class="radio-control"><i class="far fa-circle fa-fw project-light-grey"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
                   <input type="radio" id="project-blue" name="project-color" value="project-blue">
-                  <span class="radio-control"><i class="far fa-circle fa-fw app-blue"></i></span>
+                  <span class="radio-control"><i class="far fa-circle fa-fw project-blue"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
                 <span class="radio-input">
                   <input type="radio" id="project-light-blue" name="project-color" value="project-light-blue">
-                  <span class="radio-control"><i class="far fa-circle fa-fw app-light-blue"></i></span>
+                  <span class="radio-control"><i class="far fa-circle fa-fw project-light-blue"></i></span>
                 </span>
               </label>
             </div>
@@ -198,7 +198,7 @@
           <div class="modal-sep"></div>
 
           <div class="button-right">
-            <button class="close cancel" type="button">Cancel</button><button id="add-project" type="submit" href="#">Add</button>
+            <button class="button close cancel" type="button">Cancel</button><button id="add-project" class="button" type="submit" href="#">Add</button>
           </div>
 
         </form>
@@ -206,6 +206,27 @@
     </div>
   </div>
   <!-- /Add project modal -->
+
+  <!-- Confirm modal -->
+  <div id="remove-project-modal" class="modal hide">
+    <div class="modal-box">
+      <div class="modal-header">
+        <i class="close close-x far fa-times"></i>
+        <h2>Remove project</h2>
+      </div>
+      <div class="modal-content">
+
+        <p>Are you sure? This action cannot be undone.</p>
+
+        <div class="modal-sep"></div>
+
+        <div class="button-right">
+          <button class="button close cancel" type="button">Cancel</button><button id="remove-project" class="button" type="submit" href="#">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Confirm modal -->
 
   <script src="main.js"></script>
 </body>

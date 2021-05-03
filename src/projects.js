@@ -1,3 +1,5 @@
+import dom from './dom';
+
 const projects = (() => {
   const projectsList = [];
 
@@ -13,11 +15,19 @@ const projects = (() => {
   function createProject(title, icon, color) {
     const newProject = new Project(title, icon, color);
     projectsList.push(newProject);
-    console.log(projectsList);
+    dom.renderProjects();
+  }
+
+  function removeProject(index) {
+    projectsList.splice(index, 1);
+    dom.hideElement(dom.modals);
+    dom.renderProjects();
   }
 
   return {
+    projectsList,
     createProject,
+    removeProject,
   };
 })();
 

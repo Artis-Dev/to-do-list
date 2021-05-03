@@ -1,5 +1,6 @@
+import dom from './dom';
 import handlers from './handlers';
 
-console.log('Hello World!');
+dom.renderProjects();
 handlers.clickHandler();
 handlers.keyboardHandler();
