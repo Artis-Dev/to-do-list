@@ -16,15 +16,15 @@ const handlers = (() => {
         dom.activeProject(e.target);
       // Add project modal open
       } else if (e.target.classList.contains('add-project-modal')) {
-        dom.showElement(dom.addProjectModal);
+        dom.showProjectModal('addProject');
       // Edit project modal open
       } else if (e.target.classList.contains('edit-project-modal')) {
-        console.log('Edit Project Modal');
-        // dom.showElement(dom.editProjectModal);
+        projectIndex = e.target.parentElement.getAttribute('data-index');
+        dom.showProjectModal('editProject', projectIndex);
       // Remove project modal open
       } else if (e.target.classList.contains('remove-project-modal')) {
-        dom.showElement(dom.removeProjectModal);
         projectIndex = e.target.parentElement.getAttribute('data-index');
+        dom.showConfirmModal('removeProject');
       // Add task modal open
       } else if (e.target.classList.contains('add-task-modal')) {
         console.log('Add Task Modal');
@@ -37,11 +37,13 @@ const handlers = (() => {
       } else if (e.target.classList.contains('close') || e.target.classList.contains('modal')) {
         dom.hideElement(dom.modals);
       // Add project
-      } else if (e.target.id === 'add-project') {
-        e.preventDefault();
-        validation.formValidation();
+      } else if (e.target.classList.contains('add-project')) {
+        validation.addProject(e);
+      // Edit project
+      } else if (e.target.classList.contains('edit-project')) {
+        validation.editProject(e, projectIndex);
       // Remove project
-      } else if (e.target.id === 'remove-project') {
+      } else if (e.target.classList.contains('remove-project')) {
         projects.removeProject(projectIndex);
       // Toggle task
       } else if (e.target.classList.contains('toggle-task')) {
@@ -49,6 +51,7 @@ const handlers = (() => {
       // Remove task
       } else if (e.target.classList.contains('remove-task')) {
         console.log('Delete Task');
+        dom.showConfirmModal('removeTask');
       }
     });
   }

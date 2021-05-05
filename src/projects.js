@@ -18,6 +18,13 @@ const projects = (() => {
     dom.renderProjects();
   }
 
+  function editProject(index, title, icon, color) {
+    projectsList[index].title = title;
+    projectsList[index].icon = icon;
+    projectsList[index].color = color;
+    dom.renderProjects();
+  }
+
   function removeProject(index) {
     projectsList.splice(index, 1);
     dom.hideElement(dom.modals);
@@ -27,6 +34,7 @@ const projects = (() => {
   return {
     projectsList,
     createProject,
+    editProject,
     removeProject,
   };
 })();
