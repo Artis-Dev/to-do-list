@@ -35,8 +35,15 @@ p, h1 { margin: 0; }
 
 /* Header */
 header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   height: 60px;
   padding: 0 36px;
@@ -50,6 +57,13 @@ header {
   font-size: 20px;
 }
 
+.toggle-sidebar {
+  display: none !important;
+  margin-right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 /* Sidebar */
 .sidebar {
   width: 300px;
@@ -57,7 +71,22 @@ header {
   padding: 40px 20px;
   background-color: var(--light-grey);
   position: fixed;
-  overflow: auto;
+  overflow: hidden;
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.sidebar-show {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.sidebar-hide {
+  -webkit-transform: translateX(-300px);
+  transform: translateX(-300px);
 }
 
 .sidebar-project-nav {
@@ -72,6 +101,7 @@ header {
   border-radius: 8px;
   color: var(--grey);
   text-decoration: none;
+  -webkit-transition: all .2s;
   transition: all .2s;
 }
 
@@ -88,6 +118,7 @@ header {
 .sidebar-project-nav a:hover:not(.active),
 .sidebar-projects-list a:hover:not(.active) {
   background-color: var(--white);
+  -webkit-transition: all .2s;
   transition: all .2s;
 }
 
@@ -121,16 +152,44 @@ header {
 main {
   margin-left: 300px;
   padding: 40px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  z-index: 0;
+}
+
+.main-dekstop {
+  margin-left: 300px;
+}
+
+.main-mobile {
+  margin-left: 0;
 }
 
 .todo-header {
   margin-bottom: 40px;
 }
 
+.todo-item-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
 .todo-item,
 .todo-item-add {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   min-height: 60px;
   border-bottom: 1px solid rgba(0,0,0,.15);
@@ -141,6 +200,7 @@ main {
 .todo-item:hover,
 .todo-item-add:hover {
   background-color: var(--light-grey);
+  -webkit-transition: all .2s;
   transition: all .2s;
 }
 
@@ -150,6 +210,8 @@ main {
 }
 
 .todo-item-title {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
 }
 
@@ -157,10 +219,13 @@ main {
   text-decoration: line-through;
 }
 
+.todo-item-date {
+  font-size: 15px;
+}
+
 /* Modal */
 .modal {
   position: fixed;
-  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
@@ -168,6 +233,7 @@ main {
   padding: 0 20px;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
+  z-index: 20;
 }
 
 .modal-box {
@@ -176,8 +242,11 @@ main {
   border: solid 1px rgba(0,0,0,.15);
   border-radius: 8px;
   max-width: 417px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
+  -webkit-animation-duration: .3s;
   animation-duration: .3s
 }
 @keyframes fadeIn {
@@ -199,7 +268,8 @@ main {
 .close-x {
   float: right;
   color: rgba(0,0,0,.15);
-  transition: all .3s;
+  -webkit-transition: all .2s;
+  transition: all .2s;
   font-size: 24px;
 }
 
@@ -208,7 +278,8 @@ main {
   color: var(--grey);
   text-decoration: none;
   cursor: pointer;
-  transition: all .3s;
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 /* Modal content */
@@ -237,13 +308,15 @@ main {
   border-radius: 8px;
   background-color: var(--white);
   color: var(--grey);
-  transition: all .3s;
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 #form-project-title:focus {
   border-color: var(--grey);
   outline: none;
-  transition: all .3s;
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 #project-title-label {
@@ -266,8 +339,11 @@ main {
 
 #project-icons,
 #project-colors {
+  display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(7, -webkit-min-content);
+  -ms-grid-columns: -webkit-min-content 10px -webkit-min-content 10px -webkit-min-content 10px -webkit-min-content 10px -webkit-min-content 10px -webkit-min-content 10px -webkit-min-content;
+  -ms-grid-columns: min-content 10px min-content 10px min-content 10px min-content 10px min-content 10px min-content 10px min-content;
   grid-template-columns: repeat(7, min-content);
   grid-gap: 10px;
 }
@@ -286,19 +362,16 @@ main {
   height: 0;
 }
 
+
+.radio-before input:checked + .radio-control,
 #project-icons input:focus + .radio-control,
 #project-colors input:focus + .radio-control {
   border: 1px solid var(--grey);
-  transition: all 0.2s;
-}
-
-.radio-before input:checked + .radio-control {
-  border: 1px solid var(--grey);
-  transition: all 0.2s;
 }
 
 .radio-control:hover {
   border: 1px solid var(--grey);
+  -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
@@ -308,6 +381,7 @@ main {
   border-radius: 8px;
   background-color: var(--light-grey);
   border: 1px solid var(--light-grey);
+  -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
 
@@ -327,11 +401,13 @@ main {
   cursor: pointer;
   border-radius: 6px;
   color: var(--white);
-  transition: all .3s;
+  -webkit-transition: all 0.2s;
+  transition: all .2s;
 }
 
 .button:hover {
-  transition: all .3s;
+  -webkit-transition: all 0.2s;
+  transition: all .2s;
 }
 
 #project-button,
@@ -352,4 +428,10 @@ main {
 
 .cancel:hover {
   background-color: var(--light-grey);
+}
+
+@media (max-width: 960px) {
+  .toggle-sidebar {
+    display: inline-block !important;
+  }
 }
