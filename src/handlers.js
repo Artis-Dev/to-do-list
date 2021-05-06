@@ -4,7 +4,8 @@ import projects from './projects';
 
 const handlers = (() => {
   function clickHandler() {
-    let projectIndex;
+    let projectIndex = 0;
+    let taskIndex = 0;
     dom.body.addEventListener('click', (e) => {
       // Nav links
       if (e.target.classList.contains('sidebar-link')) {
@@ -24,15 +25,15 @@ const handlers = (() => {
       // Remove project modal open
       } else if (e.target.classList.contains('remove-project-modal')) {
         projectIndex = e.target.parentElement.getAttribute('data-index');
-        dom.showConfirmModal('removeProject');
+        dom.showConfirmModal('removeProject', projectIndex);
       // Add task modal open
       } else if (e.target.classList.contains('add-task-modal')) {
         console.log('Add Task Modal');
-        // dom.showModal(dom.addTaskModal);
+        // dom.showTaskModal('addTask');
       // Edit task modal open
       } else if (e.target.classList.contains('edit-task-modal')) {
         console.log('Edit Task Modal');
-        // dom.showModal(dom.editTaskModal);
+        // dom.showTaskModal('editTask', taskIndex);
       // Close all modals
       } else if (e.target.classList.contains('close') || e.target.classList.contains('modal')) {
         dom.hideElement(dom.modals);
@@ -50,8 +51,8 @@ const handlers = (() => {
         console.log('Toggle Task');
       // Remove task
       } else if (e.target.classList.contains('remove-task')) {
-        console.log('Delete Task');
-        dom.showConfirmModal('removeTask');
+        console.log('Remove Task');
+        dom.showConfirmModal('removeTask', taskIndex);
       }
     });
   }
@@ -61,7 +62,7 @@ const handlers = (() => {
       if (event.key === 'Escape') {
         dom.hideElement(dom.modals);
       }
-      // if (event.key === 'Enter' && modal.style.display === 'block') {
+      // if (event.key === 'Enter' && modal.style.display === 'block' && modal) {
       //   formValidation(event);
       // }
       // if (event.key === 'Enter' && confirmModal.style.display === 'block') {

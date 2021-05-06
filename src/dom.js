@@ -3,10 +3,10 @@ import projects from './projects';
 const dom = (() => {
   const body = document.querySelector('body');
   const projectsList = document.querySelector('.sidebar-projects-list');
-  const projectModal = document.querySelector('#add-project-modal');
-  const confirmModal = document.querySelector('#remove-project-modal');
+  const projectModal = document.querySelector('#project-modal');
+  const confirmModal = document.querySelector('#confirm-modal');
   const modals = document.querySelectorAll('.modal');
-  const projectForm = document.querySelector('#add-project-form');
+  const projectForm = document.querySelector('#project-form');
   const projectFormTitleError = document.querySelector('.title-error');
 
   function showProjectModal(modal, index = false) {
@@ -42,21 +42,34 @@ const dom = (() => {
     }
   }
 
-  function showConfirmModal(modal) {
+  function showConfirmModal(modal, index) {
     const modalHeading = document.querySelector('.confirm-modal-title');
+    const modalContent = document.querySelector('.confirm-modal-content');
     const modalSubmitButton = document.querySelector('#confirm-button');
 
     confirmModal.classList.remove('hide');
     confirmModal.classList.add('display');
-    modalSubmitButton.textContent = 'Remove';
+
+    const modalContentPrefix = document.createTextNode('You are going to remove ');
+    const modalContentPostfix = document.createTextNode('. This action cannot be undone.');
+
+    modalContent.textContent = '';
 
     if (modal === 'removeProject') {
-      console.log('qqqq');
       modalHeading.textContent = 'Remove project';
+      const projectTitle = document.createElement('span');
+      projectTitle.classList.add('confirm-modal-project-title');
+      projectTitle.textContent = projects.projectsList[index].title;
+      modalContent.appendChild(modalContentPrefix);
+      modalContent.appendChild(projectTitle);
+      modalContent.appendChild(modalContentPostfix);
       modalSubmitButton.classList.remove('remove-task');
       modalSubmitButton.classList.add('remove-project');
     } else if (modal === 'removeTask') {
       modalHeading.textContent = 'Remove task';
+      modalContent.appendChild(modalContentPrefix);
+      // modalContent.appendChild(taskTitle);
+      modalContent.appendChild(modalContentPostfix);
       modalSubmitButton.classList.remove('remove-project');
       modalSubmitButton.classList.add('remove-task');
     }

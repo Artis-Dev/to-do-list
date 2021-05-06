@@ -77,14 +77,14 @@
   </main>
 
   <!-- Add project modal -->
-  <div id="add-project-modal" class="modal hide">
+  <div id="project-modal" class="modal hide">
     <div class="modal-box">
       <div class="modal-header">
         <i class="close close-x far fa-times"></i>
         <h2 class="project-modal-title"></h2>
       </div>
       <div class="modal-content">
-        <form id="add-project-form" name="add-project-form" method="POST">
+        <form id="project-form" name="add-project-form" method="POST">
 
           <div>
             <label id="project-title-label" for="form-project-title">Project title</label>
@@ -201,7 +201,7 @@
   <!-- /Add project modal -->
 
   <!-- Confirm modal -->
-  <div id="remove-project-modal" class="modal hide">
+  <div id="confirm-modal" class="modal hide">
     <div class="modal-box">
       <div class="modal-header">
         <i class="close close-x far fa-times"></i>
@@ -209,12 +209,12 @@
       </div>
       <div class="modal-content">
 
-        <p>Are you sure? This action cannot be undone.</p>
+        <p class="confirm-modal-content"></p>
 
         <div class="modal-sep"></div>
 
         <div class="button-right">
-          <button class="button close cancel" type="button">Cancel</button><button id="confirm-button" class="button" type="submit" href="#"></button>
+          <button class="button close cancel" type="button">Cancel</button><button id="confirm-button" class="button" type="submit" href="#">Remove</button>
         </div>
       </div>
     </div>
