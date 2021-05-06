@@ -2,12 +2,38 @@ import projects from './projects';
 
 const dom = (() => {
   const body = document.querySelector('body');
+  const sidebar = document.querySelector('.sidebar');
+  const main = document.querySelector('main');
   const projectsList = document.querySelector('.sidebar-projects-list');
   const projectModal = document.querySelector('#project-modal');
   const confirmModal = document.querySelector('#confirm-modal');
   const modals = document.querySelectorAll('.modal');
   const projectForm = document.querySelector('#project-form');
   const projectFormTitleError = document.querySelector('.title-error');
+
+  function responsiveSidebar() {
+    if (window.innerWidth < 960) {
+      sidebar.classList.remove('sidebar-show');
+      sidebar.classList.add('sidebar-hide');
+      main.classList.remove('main-desktop');
+      main.classList.add('main-mobile');
+    } else {
+      sidebar.classList.remove('sidebar-hide');
+      sidebar.classList.add('sidebar-show');
+      main.classList.add('main-desktop');
+      main.classList.remove('main-mobile');
+    }
+  }
+
+  function toggleSidebar() {
+    if (!sidebar.classList.contains('sidebar-show')) {
+      sidebar.classList.remove('sidebar-hide');
+      sidebar.classList.add('sidebar-show');
+    } else if (sidebar.classList.contains('sidebar-show')) {
+      sidebar.classList.remove('sidebar-show');
+      sidebar.classList.add('sidebar-hide');
+    }
+  }
 
   function showProjectModal(modal, index = false) {
     const modalHeading = document.querySelector('.project-modal-title');
@@ -150,6 +176,8 @@ const dom = (() => {
     modals,
     projectForm,
     projectFormTitleError,
+    responsiveSidebar,
+    toggleSidebar,
     showProjectModal,
     showConfirmModal,
     showElement,

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import validation from './validation';
 import dom from './dom';
 import projects from './projects';
@@ -5,10 +6,14 @@ import projects from './projects';
 const handlers = (() => {
   function clickHandler() {
     let projectIndex = 0;
-    let taskIndex = 0;
+    const taskIndex = 0;
     dom.body.addEventListener('click', (e) => {
+      // Toggle sidebar
+      if (e.target.classList.contains('toggle-sidebar')) {
+        console.log('Toggle Sidebar');
+        dom.toggleSidebar();
       // Nav links
-      if (e.target.classList.contains('sidebar-link')) {
+      } else if (e.target.classList.contains('sidebar-link')) {
         console.log('Change link');
         dom.activeLink(e.target);
       // Project links
@@ -72,9 +77,14 @@ const handlers = (() => {
     });
   }
 
+  function resizeHandler() {
+    window.addEventListener('resize', dom.responsiveSidebar);
+  }
+
   return {
     clickHandler,
     keyboardHandler,
+    resizeHandler,
   };
 })();
 
