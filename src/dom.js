@@ -5,6 +5,7 @@ const dom = (() => {
   const sidebar = document.querySelector('.sidebar');
   const main = document.querySelector('main');
   const projectsList = document.querySelector('.sidebar-projects-list');
+  const tasksList = document.querySelector('.todo-item-list');
   const projectModal = document.querySelector('#project-modal');
   const confirmModal = document.querySelector('#confirm-modal');
   const modals = document.querySelectorAll('.modal');
@@ -12,15 +13,13 @@ const dom = (() => {
   const projectFormTitleError = document.querySelector('.title-error');
 
   function responsiveSidebar() {
-    if (window.innerWidth < 960) {
+    if (window.innerWidth <= 960) {
       sidebar.classList.remove('sidebar-show');
       sidebar.classList.add('sidebar-hide');
-      main.classList.remove('main-desktop');
       main.classList.add('main-mobile');
     } else {
       sidebar.classList.remove('sidebar-hide');
       sidebar.classList.add('sidebar-show');
-      main.classList.add('main-desktop');
       main.classList.remove('main-mobile');
     }
   }
@@ -72,12 +71,11 @@ const dom = (() => {
     const modalHeading = document.querySelector('.confirm-modal-title');
     const modalContent = document.querySelector('.confirm-modal-content');
     const modalSubmitButton = document.querySelector('#confirm-button');
+    const modalContentPrefix = document.createTextNode('You are going to remove ');
+    const modalContentPostfix = document.createTextNode('. This action cannot be undone.');
 
     confirmModal.classList.remove('hide');
     confirmModal.classList.add('display');
-
-    const modalContentPrefix = document.createTextNode('You are going to remove ');
-    const modalContentPostfix = document.createTextNode('. This action cannot be undone.');
 
     modalContent.textContent = '';
 
@@ -155,9 +153,9 @@ const dom = (() => {
       const projectIcon = document.createElement('i');
       projectIcon.classList.add('far', projects.projectsList[i].icon, 'fa-fw', projects.projectsList[i].color, 'sidebar-project', 'sidebar-project-icon');
       projectLink.appendChild(projectIcon);
-      // Create name
-      const projectName = document.createTextNode(projects.projectsList[i].title);
-      projectLink.appendChild(projectName);
+      // Create title
+      const projectTitle = document.createTextNode(projects.projectsList[i].title);
+      projectLink.appendChild(projectTitle);
       // Create remove icon
       const projectRemoveIcon = document.createElement('i');
       projectRemoveIcon.classList.add('far', 'fa-trash', 'remove-project-modal');
@@ -168,6 +166,61 @@ const dom = (() => {
       projectLink.appendChild(projectEditIcon);
     }
   }
+
+  function renderTasks(projectIndex) {
+    tasksList.textContent = '';
+    for (let i = 0; i < projects.projectsList[projectIndex].tasks.length; i += 1) {
+      const todoItem = document.createElement('div');
+      todoItem.classList.add('todo-item', 'toggle-task');
+      todoItem.setAttribute('data-project-index', projectIndex);
+      tasksList.appendChild(todoItem);
+      // Create icon
+      const taskIcon = document.createElement('i');
+      taskIcon.classList.add('far', 'fa-circle', 'fa-fw', 'toggle-task');
+      todoItem.appendChild(taskIcon);
+      // Create title
+      const taskTitle = document.createElement('p');
+      taskTitle.classList.add('todo-item-title', 'toggle-task');
+      taskTitle.textContent = projects.projectsList[projectIndex].tasks[i].title;
+      todoItem.appendChild(taskTitle);
+      // Create date
+      const taskDate = document.createElement('p');
+      taskDate.classList.add('todo-item-date', 'toggle-task');
+      taskDate.textContent = '2020-04-20';
+      todoItem.appendChild(taskDate);
+      // Create edit icon
+      const taskEditIcon = document.createElement('i');
+      taskEditIcon.classList.add('far', 'fa-edit', 'fa-fw', 'edit-task-modal');
+      todoItem.appendChild(taskEditIcon);
+      // Create remove icon
+      const taskRemoveIcon = document.createElement('i');
+      taskRemoveIcon.classList.add('far', 'fa-trash', 'fa-fw', 'remove-task-modal');
+      todoItem.appendChild(taskRemoveIcon);
+    }
+    // Add task line
+    const taskAdd = document.createElement('div');
+    taskAdd.classList.add('todo-item-add', 'add-task-modal');
+    tasksList.appendChild(taskAdd);
+    const taskAddIcon = document.createElement('i');
+    taskAddIcon.classList.add('far', 'fa-plus', 'fa-fw', 'add-task-modal');
+    taskAdd.appendChild(taskAddIcon);
+    const taskAddTitle = document.createElement('p');
+    taskAddTitle.classList.add('todo-item-title', 'add-task-modal');
+    taskAddTitle.textContent = 'Add new task';
+    taskAdd.appendChild(taskAddTitle);
+  }
+
+  // <div class="todo-item toggle-task">
+  //   <i class="far fa-check-circle fa-fw toggle-task"></i>
+  //   <p class="todo-item-title toggle-task done">Make appointments</p>
+  //   <p class="todo-item-date toggle-task">2020-04-20</p>
+  //   <i class="far fa-edit fa-fw edit-task-modal"></i>
+  //   <i class="far fa-trash fa-fw remove-task-modal"></i>
+  // </div>
+  // <div class="todo-item-add add-task-modal">
+  //   <i class="far fa-plus fa-fw add-task-modal"></i>
+  //   <p class="todo-item-title add-task-modal">Add new task</p>
+  // </div>
 
   return {
     body,
@@ -185,6 +238,7 @@ const dom = (() => {
     activeLink,
     activeProject,
     renderProjects,
+    renderTasks,
   };
 })();
 

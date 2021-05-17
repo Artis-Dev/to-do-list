@@ -2,6 +2,7 @@
 import validation from './validation';
 import dom from './dom';
 import projects from './projects';
+import tasks from './tasks';
 
 const handlers = (() => {
   function clickHandler() {
@@ -10,7 +11,6 @@ const handlers = (() => {
     dom.body.addEventListener('click', (e) => {
       // Toggle sidebar
       if (e.target.classList.contains('toggle-sidebar')) {
-        console.log('Toggle Sidebar');
         dom.toggleSidebar();
       // Nav links
       } else if (e.target.classList.contains('sidebar-link')) {
@@ -35,10 +35,15 @@ const handlers = (() => {
       } else if (e.target.classList.contains('add-task-modal')) {
         console.log('Add Task Modal');
         // dom.showTaskModal('addTask');
+        tasks.createTask(0, 'title', 'description', 'priority', 'date'); // test
       // Edit task modal open
       } else if (e.target.classList.contains('edit-task-modal')) {
         console.log('Edit Task Modal');
         // dom.showTaskModal('editTask', taskIndex);
+      // Remove task modal open
+      } else if (e.target.classList.contains('remove-task-modal')) {
+        console.log('Edit Task Modal');
+        dom.showConfirmModal('removeTask', taskIndex);
       // Close all modals
       } else if (e.target.classList.contains('close') || e.target.classList.contains('modal')) {
         dom.hideElement(dom.modals);
@@ -51,13 +56,20 @@ const handlers = (() => {
       // Remove project
       } else if (e.target.classList.contains('remove-project')) {
         projects.removeProject(projectIndex);
-      // Toggle task
-      } else if (e.target.classList.contains('toggle-task')) {
-        console.log('Toggle Task');
+      // Add Task
+      } else if (e.target.classList.contains('add-task')) {
+        // validation.addTask(e);
+        tasks.createTask(0, 'title', 'description', 'priority', 'date'); // test
+      // Edit Task
+      } else if (e.target.classList.contains('edit-task')) {
+        // validation.editTask(e, taskIndex);
       // Remove task
       } else if (e.target.classList.contains('remove-task')) {
         console.log('Remove Task');
-        dom.showConfirmModal('removeTask', taskIndex);
+        // tasks.removeTask(taskIndex);
+      // Toggle task
+      } else if (e.target.classList.contains('toggle-task')) {
+        console.log('Toggle Task');
       }
     });
   }
@@ -67,12 +79,8 @@ const handlers = (() => {
       if (event.key === 'Escape') {
         dom.hideElement(dom.modals);
       }
-      // if (event.key === 'Enter' && modal.style.display === 'block' && modal) {
-      //   formValidation(event);
-      // }
-      // if (event.key === 'Enter' && confirmModal.style.display === 'block') {
-      //   clearData();
-      //   confirmModal.style.display = 'none';
+      // if (event.key === 'Enter' && modal.style.display === 'block') {
+      //   submitButton.click();
       // }
     });
   }
