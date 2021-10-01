@@ -1,6 +1,7 @@
 /* Global rules */
 :root {
   --primary-red: #FE5F55;
+  --primary-red-hover: #FE4134;
   --grey: #50514F;
   --white: #FFFFFF;
   --light-grey: #F6F5F8;
@@ -72,7 +73,7 @@ header {
 }
 
 .toggle-sidebar:hover {
-  background-color: #FE4134;
+  background-color: var(--primary-red-hover);
   -webkit-transition: all .2s;
   transition: all .2s;
 }
@@ -319,15 +320,24 @@ main {
 }
 
 /* Form styling */
-#project-form > div:not(:last-child) {
+#project-form > div:not(:last-child),
+#task-form > div:not(:last-child) {
   margin-bottom: 20px;
 }
 
-#project-form > label {
+/* #project-form > label,
+#task-form > label {
+  margin-bottom: 6px;
+} */
+
+#project-form label,
+#task-form label {
+  display: inline-block;
   margin-bottom: 6px;
 }
 
-#form-project-title {
+#form-project-title,
+#form-task-priority {
   width: 100%;
   height: 45px;
   padding: 0 12px;
@@ -344,11 +354,6 @@ main {
   outline: none;
   -webkit-transition: all .2s;
   transition: all .2s;
-}
-
-#project-title-label {
-  display: inline-block;
-  margin-bottom: 6px;
 }
 
 /* Form errors */
@@ -388,7 +393,6 @@ main {
   width: 0;
   height: 0;
 }
-
 
 .radio-before input:checked + .radio-control,
 #project-icons input:focus + .radio-control,
@@ -438,19 +442,21 @@ main {
 }
 
 #project-button,
+#task-button,
 #confirm-button {
   background-color: var(--primary-red);
   margin-left: 20px;
 }
 
 #project-button:hover,
+#task-button:hover,
 #confirm-button:hover {
-  background-color: #FE4134;
+  background-color: var(--primary-red-hover);
 }
 
 .cancel {
   background-color: var(--light-grey);
-  color: #3C3744;
+  color: var(--grey);
 }
 
 .cancel:hover {

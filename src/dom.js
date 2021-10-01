@@ -7,6 +7,7 @@ const dom = (() => {
   const projectsList = document.querySelector('.sidebar-projects-list');
   const tasksList = document.querySelector('.todo-item-list');
   const projectModal = document.querySelector('#project-modal');
+  const taskModal = document.querySelector('#task-modal');
   const confirmModal = document.querySelector('#confirm-modal');
   const modals = document.querySelectorAll('.modal');
   const projectForm = document.querySelector('#project-form');
@@ -48,6 +49,39 @@ const dom = (() => {
       modalSubmitButton.classList.remove('edit-project');
       modalSubmitButton.classList.add('add-project');
     } else if (modal === 'editProject') {
+      const currentProjectTitle = projects.projectsList[index].title;
+      const currentProjectIcon = projects.projectsList[index].icon;
+      const currentProjectColor = projects.projectsList[index].color;
+
+      const projectTitle = document.querySelector('#form-project-title');
+      const projectIcon = document.querySelector(`input[value=${currentProjectIcon}]`);
+      const projectColor = document.querySelector(`input[value=${currentProjectColor}]`);
+
+      projectTitle.value = currentProjectTitle;
+      projectIcon.checked = true;
+      projectColor.checked = true;
+
+      modalHeading.textContent = 'Edit project';
+      modalSubmitButton.textContent = 'Edit';
+      modalSubmitButton.classList.remove('add-project');
+      modalSubmitButton.classList.add('edit-project');
+    }
+  }
+
+  function showTaskModal(modal, index = false) {
+    const modalHeading = document.querySelector('.task-modal-title');
+    const modalSubmitButton = document.querySelector('#task-button');
+
+    taskModal.classList.remove('hide');
+    taskModal.classList.add('display');
+
+    if (modal === 'addTask') {
+      projectForm.reset();
+      modalHeading.textContent = 'New task';
+      modalSubmitButton.textContent = 'Add';
+      modalSubmitButton.classList.remove('edit-task');
+      modalSubmitButton.classList.add('add-task');
+    } else if (modal === 'editTask') {
       const currentProjectTitle = projects.projectsList[index].title;
       const currentProjectIcon = projects.projectsList[index].icon;
       const currentProjectColor = projects.projectsList[index].color;
@@ -232,6 +266,7 @@ const dom = (() => {
     responsiveSidebar,
     toggleSidebar,
     showProjectModal,
+    showTaskModal,
     showConfirmModal,
     showElement,
     hideElement,

@@ -2,7 +2,7 @@
 import validation from './validation';
 import dom from './dom';
 import projects from './projects';
-import tasks from './tasks';
+// import tasks from './tasks';
 
 const handlers = (() => {
   function clickHandler() {
@@ -34,8 +34,7 @@ const handlers = (() => {
       // Add task modal open
       } else if (e.target.classList.contains('add-task-modal')) {
         console.log('Add Task Modal');
-        // dom.showTaskModal('addTask');
-        tasks.createTask(0, 'title', 'description', 'priority', 'date'); // test
+        dom.showTaskModal('addTask');
       // Edit task modal open
       } else if (e.target.classList.contains('edit-task-modal')) {
         console.log('Edit Task Modal');
@@ -58,8 +57,7 @@ const handlers = (() => {
         projects.removeProject(projectIndex);
       // Add Task
       } else if (e.target.classList.contains('add-task')) {
-        // validation.addTask(e);
-        tasks.createTask(0, 'title', 'description', 'priority', 'date'); // test
+        validation.addTask(e);
       // Edit Task
       } else if (e.target.classList.contains('edit-task')) {
         // validation.editTask(e, taskIndex);

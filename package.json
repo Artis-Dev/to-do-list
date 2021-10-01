@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/Artis-Dev/to-do-list#readme",
   "devDependencies": {
-    "eslint": "^7.23.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "webpack": "^5.30.0",
-    "webpack-cli": "^4.6.0"
+    "eslint-plugin-import": "^2.24.2",
+    "webpack": "^5.55.1",
+    "webpack-cli": "^4.8.0"
   }
 }
