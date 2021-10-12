@@ -3,24 +3,48 @@ import dom from './dom';
 
 const tasks = (() => {
   class Task {
-    constructor(title, description, priority, dueDate) {
+    constructor(title, priority, schedule) {
       this.title = title;
-      this.description = description;
       this.priority = priority;
-      this.dueDate = dueDate;
+      this.schedule = schedule;
       this.done = false;
     }
   }
 
-  function createTask(projectIndex, title, description, priority, dueDate) {
-    const newTask = new Task(title, description, priority, dueDate);
+  function createTask(projectIndex, title, priority = 0, schedule = 0) {
+    const newTask = new Task(title, priority, schedule);
     projects.projectsList[projectIndex].tasks.push(newTask);
-    console.log(projects.projectsList[projectIndex]);
-    dom.renderTasks(0);
+    dom.renderTasks(projectIndex);
+  }
+
+  function toggleTask(projectIndex, taskIndex) {
+    if (projects.projectsList[projectIndex].tasks[taskIndex].done) {
+      projects.projectsList[projectIndex].tasks[taskIndex].done = false;
+    } else {
+      projects.projectsList[projectIndex].tasks[taskIndex].done = true;
+    }
+    console.log(projects.projectsList[projectIndex].tasks[taskIndex].done);
+    dom.renderTasks(projectIndex);
+  }
+
+  function editTask(projectIndex, taskIndex, title, priority, schedule) {
+    projects.projectsList[projectIndex].tasks[taskIndex].title = title;
+    projects.projectsList[projectIndex].tasks[taskIndex].priority = priority;
+    projects.projectsList[projectIndex].tasks[taskIndex].schedule = schedule;
+    dom.renderTasks(projectIndex);
+  }
+
+  function removeTask(projectIndex, taskIndex) {
+    projects.projectsList[projectIndex].tasks.splice(taskIndex, 1);
+    dom.hideElement(dom.modals);
+    dom.renderTasks(projectIndex);
   }
 
   return {
     createTask,
+    toggleTask,
+    editTask,
+    removeTask,
   };
 })();
 

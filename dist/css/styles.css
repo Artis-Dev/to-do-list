@@ -6,13 +6,13 @@
   --white: #FFFFFF;
   --light-grey: #F6F5F8;
   /* App colors */
-  --project-green: #BADBCC;
-  --project-red: #F5C2C7;
-  --project-yellow: #FFECB5;
-  --project-grey: #BCBEBF;
-  --project-light-grey: #D3D6D8;
-  --project-blue: #B6D4FE;
-  --project-light-blue: #B6EFFB;
+  --project-green: #90dab9;
+  --project-red: #f5a3ab;
+  --project-yellow: #fadd87;
+  --project-grey: #a8a9aa;
+  --project-light-grey: #cbcdce;
+  --project-blue: #98c1fa;
+  --project-light-blue: #99ebfc;
 }
 
 body {
@@ -295,17 +295,18 @@ main {
 
 .close-x {
   float: right;
-  color: rgba(0,0,0,.15);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 24px;
   -webkit-transition: all .2s;
   transition: all .2s;
-  font-size: 24px;
 }
 
 .close-x:hover,
 .close-x:focus {
-  color: var(--grey);
   text-decoration: none;
   cursor: pointer;
+  background-color: var(--white);
   -webkit-transition: all .2s;
   transition: all .2s;
 }
@@ -315,7 +316,7 @@ main {
   padding: 20px;
 }
 
-.confirm-modal-project-title {
+.confirm-modal-title {
   font-weight: 700;
 }
 
@@ -337,7 +338,9 @@ main {
 }
 
 #form-project-title,
-#form-task-priority {
+#form-task-title,
+#form-task-priority,
+#form-task-schedule {
   width: 100%;
   height: 45px;
   padding: 0 12px;
@@ -349,7 +352,10 @@ main {
   transition: all .2s;
 }
 
-#form-project-title:focus {
+#form-project-title:focus,
+#form-task-title:focus,
+#form-task-priority:focus,
+#form-task-schedule:focus {
   border-color: var(--grey);
   outline: none;
   -webkit-transition: all .2s;
@@ -357,7 +363,7 @@ main {
 }
 
 /* Form errors */
-.title-error {
+.form-error {
   margin: 6px 0 0;
   font-size: 14px;
   color: var(--primary-red);

@@ -4,58 +4,74 @@ import dom from './dom';
 
 const validation = (() => {
   function addProject(event) {
-    const projectTitle = document.forms['add-project-form']['project-title'].value;
-    const projectIcon = document.forms['add-project-form']['project-icon'].value;
-    const projectColor = document.forms['add-project-form']['project-color'].value;
+    const projectTitle = document.forms['project-form']['project-title'].value;
+    const projectIcon = document.forms['project-form']['project-icon'].value;
+    const projectColor = document.forms['project-form']['project-color'].value;
 
     event.preventDefault();
 
     if (projectTitle !== '') {
       projects.createProject(projectTitle, projectIcon, projectColor);
-      dom.hideElement(dom.projectFormTitleError);
+      dom.hideElement(dom.formProjectTitleError);
       dom.hideElement(dom.modals);
     } else if (projectTitle === '') {
-      dom.showElement(dom.projectFormTitleError);
+      dom.showElement(dom.formProjectTitleError);
     }
   }
 
   function editProject(event, index) {
-    const projectTitle = document.forms['add-project-form']['project-title'].value;
-    const projectIcon = document.forms['add-project-form']['project-icon'].value;
-    const projectColor = document.forms['add-project-form']['project-color'].value;
+    const projectTitle = document.forms['project-form']['project-title'].value;
+    const projectIcon = document.forms['project-form']['project-icon'].value;
+    const projectColor = document.forms['project-form']['project-color'].value;
 
     event.preventDefault();
 
     if (projectTitle !== '') {
       projects.editProject(index, projectTitle, projectIcon, projectColor);
-      dom.hideElement(dom.projectFormTitleError);
+      dom.hideElement(dom.formProjectTitleError);
       dom.hideElement(dom.modals);
     } else if (projectTitle === '') {
-      dom.showElement(dom.projectFormTitleError);
+      dom.showElement(dom.formProjectTitleError);
     }
   }
 
-  function addTask(event) {
-    // const projectTitle = document.forms['add-project-form']['project-title'].value;
-    // const projectIcon = document.forms['add-project-form']['project-icon'].value;
-    // const projectColor = document.forms['add-project-form']['project-color'].value;
+  function addTask(event, projectIndex) {
+    const taskTitle = document.forms['task-form']['task-title'].value;
+    const taskPriority = document.forms['task-form']['task-priority'].value;
+    const taskSchedule = document.forms['task-form']['task-schedule'].value;
 
     event.preventDefault();
 
-    // if (projectTitle !== '') {
-    //   projects.createProject(projectTitle, projectIcon, projectColor);
-    //   dom.hideElement(dom.projectFormTitleError);
-    //   dom.hideElement(dom.modals);
-    // } else if (projectTitle === '') {
-    //   dom.showElement(dom.projectFormTitleError);
-    // }
-    tasks.createTask(0, 'title', 'description', 'priority', 'date'); // test
+    if (taskTitle !== '') {
+      tasks.createTask(projectIndex, taskTitle, taskPriority, taskSchedule);
+      dom.hideElement(dom.formTaskTitleError);
+      dom.hideElement(dom.modals);
+    } else if (taskTitle === '') {
+      dom.showElement(dom.formTaskTitleError);
+    }
+  }
+
+  function editTask(event, projectIndex, taskIndex) {
+    const taskTitle = document.forms['task-form']['task-title'].value;
+    const taskPriority = document.forms['task-form']['task-priority'].value;
+    const taskSchedule = document.forms['task-form']['task-schedule'].value;
+
+    event.preventDefault();
+
+    if (taskTitle !== '') {
+      tasks.editTask(projectIndex, taskIndex, taskTitle, taskPriority, taskSchedule);
+      dom.hideElement(dom.formTaskTitleError);
+      dom.hideElement(dom.modals);
+    } else if (taskTitle === '') {
+      dom.showElement(dom.formrTaskTitleError);
+    }
   }
 
   return {
     addProject,
     editProject,
     addTask,
+    editTask,
   };
 })();
 

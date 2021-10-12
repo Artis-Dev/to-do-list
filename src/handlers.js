@@ -2,12 +2,12 @@
 import validation from './validation';
 import dom from './dom';
 import projects from './projects';
-// import tasks from './tasks';
+import tasks from './tasks';
 
 const handlers = (() => {
   function clickHandler() {
     let projectIndex = 0;
-    const taskIndex = 0;
+    let taskIndex = 0;
     dom.body.addEventListener('click', (e) => {
       // Toggle sidebar
       if (e.target.classList.contains('toggle-sidebar')) {
@@ -18,8 +18,8 @@ const handlers = (() => {
         dom.activeLink(e.target);
       // Project links
       } else if (e.target.classList.contains('sidebar-project')) {
-        console.log('Change Project');
-        dom.activeProject(e.target);
+        projectIndex = (e.target.getAttribute('data-index')) ? e.target.getAttribute('data-index') : e.target.parentElement.getAttribute('data-index');
+        dom.changeProject(projectIndex);
       // Add project modal open
       } else if (e.target.classList.contains('add-project-modal')) {
         dom.showProjectModal('addProject');
@@ -33,16 +33,15 @@ const handlers = (() => {
         dom.showConfirmModal('removeProject', projectIndex);
       // Add task modal open
       } else if (e.target.classList.contains('add-task-modal')) {
-        console.log('Add Task Modal');
         dom.showTaskModal('addTask');
       // Edit task modal open
       } else if (e.target.classList.contains('edit-task-modal')) {
-        console.log('Edit Task Modal');
-        // dom.showTaskModal('editTask', taskIndex);
+        taskIndex = e.target.parentElement.getAttribute('data-task-index');
+        dom.showTaskModal('editTask', projectIndex, taskIndex);
       // Remove task modal open
       } else if (e.target.classList.contains('remove-task-modal')) {
-        console.log('Edit Task Modal');
-        dom.showConfirmModal('removeTask', taskIndex);
+        taskIndex = e.target.parentElement.getAttribute('data-task-index');
+        dom.showConfirmModal('removeTask', projectIndex, taskIndex);
       // Close all modals
       } else if (e.target.classList.contains('close') || e.target.classList.contains('modal')) {
         dom.hideElement(dom.modals);
@@ -57,17 +56,18 @@ const handlers = (() => {
         projects.removeProject(projectIndex);
       // Add Task
       } else if (e.target.classList.contains('add-task')) {
-        validation.addTask(e);
+        validation.addTask(e, projectIndex);
       // Edit Task
       } else if (e.target.classList.contains('edit-task')) {
-        // validation.editTask(e, taskIndex);
+        validation.editTask(e, projectIndex, taskIndex);
       // Remove task
       } else if (e.target.classList.contains('remove-task')) {
-        console.log('Remove Task');
-        // tasks.removeTask(taskIndex);
+        tasks.removeTask(projectIndex, taskIndex);
       // Toggle task
       } else if (e.target.classList.contains('toggle-task')) {
         console.log('Toggle Task');
+        taskIndex = (e.target.getAttribute('data-task-index')) ? e.target.getAttribute('data-task-index') : e.target.parentElement.getAttribute('data-task-index');
+        tasks.toggleTask(projectIndex, taskIndex);
       }
     });
   }
