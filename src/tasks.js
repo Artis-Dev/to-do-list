@@ -23,7 +23,6 @@ const tasks = (() => {
     } else {
       projects.projectsList[projectIndex].tasks[taskIndex].done = true;
     }
-    console.log(projects.projectsList[projectIndex].tasks[taskIndex].done);
     dom.renderTasks(projectIndex);
   }
 

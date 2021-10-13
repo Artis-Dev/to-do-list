@@ -228,11 +228,6 @@ const dom = (() => {
         // Create icon
         const taskIcon = document.createElement('i');
         taskIcon.classList.add('far', 'fa-fw', 'toggle-task');
-        if (projects.projectsList[projectIndex].tasks[i].done === true) {
-          taskIcon.classList.add('fa-check-circle');
-        } else {
-          taskIcon.classList.add('fa-circle');
-        }
         if (projects.projectsList[projectIndex].tasks[i].priority === 'low') {
           taskIcon.classList.add('project-green');
         } else if (projects.projectsList[projectIndex].tasks[i].priority === 'medium') {
@@ -247,12 +242,26 @@ const dom = (() => {
         const taskTitle = document.createElement('p');
         taskTitle.classList.add('todo-item-title', 'toggle-task');
         taskTitle.textContent = projects.projectsList[projectIndex].tasks[i].title;
+        if (projects.projectsList[projectIndex].tasks[i].done === true) {
+          taskIcon.classList.add('fa-check-circle');
+          taskTitle.classList.add('done');
+        } else {
+          taskIcon.classList.add('fa-circle');
+          taskTitle.classList.remove('done');
+        }
         todoItem.appendChild(taskTitle);
         // Create date
-        const taskDate = document.createElement('p');
-        taskDate.classList.add('todo-item-date', 'toggle-task');
-        taskDate.textContent = projects.projectsList[projectIndex].tasks[i].schedule;
-        todoItem.appendChild(taskDate);
+        if (projects.projectsList[projectIndex].tasks[i].schedule !== '') {
+          const taskDate = document.createElement('p');
+          taskDate.classList.add('todo-item-date', 'todo-item-pill', 'toggle-task');
+          taskDate.textContent = projects.projectsList[projectIndex].tasks[i].schedule;
+          todoItem.appendChild(taskDate);
+        }
+        // Create project name
+        const taskProject = document.createElement('p');
+        taskProject.classList.add('todo-item-pill', `${projects.projectsList[projectIndex].color}-background`, 'toggle-task');
+        taskProject.textContent = projects.projectsList[projectIndex].title;
+        todoItem.appendChild(taskProject);
         // Create edit icon
         const taskEditIcon = document.createElement('i');
         taskEditIcon.classList.add('far', 'fa-edit', 'fa-fw', 'edit-task-modal');
@@ -264,6 +273,7 @@ const dom = (() => {
       }
       // Add task line
       const taskAdd = document.createElement('div');
+      taskAdd.setAttribute('data-project-index', projectIndex);
       taskAdd.classList.add('todo-item-add', 'add-task-modal');
       tasksList.appendChild(taskAdd);
       const taskAddIcon = document.createElement('i');

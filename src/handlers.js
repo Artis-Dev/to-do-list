@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import validation from './validation';
 import dom from './dom';
 import projects from './projects';
@@ -33,7 +32,8 @@ const handlers = (() => {
         dom.showConfirmModal('removeProject', projectIndex);
       // Add task modal open
       } else if (e.target.classList.contains('add-task-modal')) {
-        dom.showTaskModal('addTask');
+        projectIndex = (e.target.parentElement.getAttribute('data-project-index')) ? e.target.parentElement.getAttribute('data-project-index') : e.target.getAttribute('data-project-index');
+        dom.showTaskModal('addTask', projectIndex);
       // Edit task modal open
       } else if (e.target.classList.contains('edit-task-modal')) {
         taskIndex = e.target.parentElement.getAttribute('data-task-index');
@@ -65,7 +65,6 @@ const handlers = (() => {
         tasks.removeTask(projectIndex, taskIndex);
       // Toggle task
       } else if (e.target.classList.contains('toggle-task')) {
-        console.log('Toggle Task');
         taskIndex = (e.target.getAttribute('data-task-index')) ? e.target.getAttribute('data-task-index') : e.target.parentElement.getAttribute('data-task-index');
         tasks.toggleTask(projectIndex, taskIndex);
       }

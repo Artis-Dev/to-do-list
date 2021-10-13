@@ -31,6 +31,14 @@ p, h1 { margin: 0; }
 .project-blue { color: var(--project-blue); }
 .project-light-blue { color: var(--project-light-blue); }
 
+.project-green-background { background-color: var(--project-green); }
+.project-red-background { background-color: var(--project-red); }
+.project-yellow-background { background-color: var(--project-yellow); }
+.project-grey-background { background-color: var(--project-grey); }
+.project-light-grey-background { background-color: var(--project-light-grey); }
+.project-blue-background { background-color: var(--project-blue); }
+.project-light-blue-background { background-color: var(--project-light-blue); }
+
 .hide { display: none; }
 .display { display: block; }
 
@@ -247,8 +255,15 @@ main {
   text-decoration: line-through;
 }
 
-.todo-item-date {
+.todo-item-pill {
   font-size: 15px;
+  padding: 4px 6px;
+  border-radius: 14px;
+}
+
+.todo-item-date {
+  background-color: var(--primary-red);
+  color: var(--white);
 }
 
 /* Modal */
