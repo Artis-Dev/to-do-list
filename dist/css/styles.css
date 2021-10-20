@@ -9,7 +9,6 @@
   --project-green: #90dab9;
   --project-red: #f5a3ab;
   --project-yellow: #fadd87;
-  --project-grey: #a8a9aa;
   --project-light-grey: #cbcdce;
   --project-blue: #98c1fa;
   --project-light-blue: #99ebfc;
@@ -26,7 +25,6 @@ p, h1 { margin: 0; }
 .project-green { color: var(--project-green); }
 .project-red { color: var(--project-red); }
 .project-yellow { color: var(--project-yellow); }
-.project-grey { color: var(--project-grey); }
 .project-light-grey { color: var(--project-light-grey); }
 .project-blue { color: var(--project-blue); }
 .project-light-blue { color: var(--project-light-blue); }
@@ -34,7 +32,6 @@ p, h1 { margin: 0; }
 .project-green-background { background-color: var(--project-green); }
 .project-red-background { background-color: var(--project-red); }
 .project-yellow-background { background-color: var(--project-yellow); }
-.project-grey-background { background-color: var(--project-grey); }
 .project-light-grey-background { background-color: var(--project-light-grey); }
 .project-blue-background { background-color: var(--project-blue); }
 .project-light-blue-background { background-color: var(--project-light-blue); }
@@ -284,7 +281,7 @@ main {
   margin: 15% auto;
   border: solid 1px rgba(0,0,0,.15);
   border-radius: 8px;
-  max-width: 417px;
+  max-width: 362px;
   -webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: fadeIn;

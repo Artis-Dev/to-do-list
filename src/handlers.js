@@ -7,40 +7,63 @@ const handlers = (() => {
   function clickHandler() {
     let projectIndex = 0;
     let taskIndex = 0;
+    let link;
     dom.body.addEventListener('click', (e) => {
       // Toggle sidebar
       if (e.target.classList.contains('toggle-sidebar')) {
         dom.toggleSidebar();
       // Nav links
-      } else if (e.target.classList.contains('sidebar-link')) {
-        console.log('Change link');
-        dom.activeLink(e.target);
+      } else if (e.target.classList.contains('link-inbox')) {
+        link = 'inbox';
+        dom.changeLink('inbox');
+      // Nav links
+      } else if (e.target.classList.contains('link-today')) {
+        console.log('Today');
+        dom.selectLink('today');
+        dom.renderHeader('today');
+      // Nav links
+      } else if (e.target.classList.contains('link-week')) {
+        console.log('Week');
+        dom.selectLink('week');
+        dom.renderHeader('week');
+      // Nav links
+      } else if (e.target.classList.contains('link-important')) {
+        link = 'important';
+        dom.changeLink('important');
+      // Nav links
+      } else if (e.target.classList.contains('link-completed')) {
+        link = 'completed';
+        dom.changeLink('completed');
       // Project links
       } else if (e.target.classList.contains('sidebar-project')) {
-        projectIndex = (e.target.getAttribute('data-index')) ? e.target.getAttribute('data-index') : e.target.parentElement.getAttribute('data-index');
-        dom.changeProject(projectIndex);
+        projectIndex = parseInt((e.target.getAttribute('data-index')) ? e.target.getAttribute('data-index') : e.target.parentElement.getAttribute('data-index'), 10);
+        link = undefined;
+        dom.changeLink(projectIndex);
       // Add project modal open
       } else if (e.target.classList.contains('add-project-modal')) {
+        link = undefined;
         dom.showProjectModal('addProject');
       // Edit project modal open
       } else if (e.target.classList.contains('edit-project-modal')) {
-        projectIndex = e.target.parentElement.getAttribute('data-index');
+        link = undefined;
+        projectIndex = parseInt(e.target.parentElement.getAttribute('data-index'), 10);
         dom.showProjectModal('editProject', projectIndex);
       // Remove project modal open
       } else if (e.target.classList.contains('remove-project-modal')) {
-        projectIndex = e.target.parentElement.getAttribute('data-index');
+        projectIndex = parseInt(e.target.parentElement.getAttribute('data-index'), 10);
         dom.showConfirmModal('removeProject', projectIndex);
       // Add task modal open
       } else if (e.target.classList.contains('add-task-modal')) {
-        projectIndex = (e.target.parentElement.getAttribute('data-project-index')) ? e.target.parentElement.getAttribute('data-project-index') : e.target.getAttribute('data-project-index');
+        projectIndex = parseInt((e.target.parentElement.getAttribute('data-project-index')) ? e.target.parentElement.getAttribute('data-project-index') : e.target.getAttribute('data-project-index'), 10);
         dom.showTaskModal('addTask', projectIndex);
       // Edit task modal open
       } else if (e.target.classList.contains('edit-task-modal')) {
-        taskIndex = e.target.parentElement.getAttribute('data-task-index');
+        taskIndex = parseInt(e.target.parentElement.getAttribute('data-task-index'), 10);
         dom.showTaskModal('editTask', projectIndex, taskIndex);
       // Remove task modal open
       } else if (e.target.classList.contains('remove-task-modal')) {
-        taskIndex = e.target.parentElement.getAttribute('data-task-index');
+        projectIndex = parseInt(e.target.parentElement.getAttribute('data-project-index'), 10);
+        taskIndex = parseInt(e.target.parentElement.getAttribute('data-task-index'), 10);
         dom.showConfirmModal('removeTask', projectIndex, taskIndex);
       // Close all modals
       } else if (e.target.classList.contains('close') || e.target.classList.contains('modal')) {
@@ -59,14 +82,15 @@ const handlers = (() => {
         validation.addTask(e, projectIndex);
       // Edit Task
       } else if (e.target.classList.contains('edit-task')) {
-        validation.editTask(e, projectIndex, taskIndex);
+        validation.editTask(e, projectIndex, taskIndex, link);
       // Remove task
       } else if (e.target.classList.contains('remove-task')) {
-        tasks.removeTask(projectIndex, taskIndex);
+        tasks.removeTask(projectIndex, taskIndex, link);
       // Toggle task
       } else if (e.target.classList.contains('toggle-task')) {
-        taskIndex = (e.target.getAttribute('data-task-index')) ? e.target.getAttribute('data-task-index') : e.target.parentElement.getAttribute('data-task-index');
-        tasks.toggleTask(projectIndex, taskIndex);
+        projectIndex = parseInt((e.target.getAttribute('data-project-index')) ? e.target.getAttribute('data-project-index') : e.target.parentElement.getAttribute('data-project-index'), 10);
+        taskIndex = parseInt((e.target.getAttribute('data-task-index')) ? e.target.getAttribute('data-task-index') : e.target.parentElement.getAttribute('data-task-index'), 10);
+        tasks.toggleTask(projectIndex, taskIndex, link);
       }
     });
   }

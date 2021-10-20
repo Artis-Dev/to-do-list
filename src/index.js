@@ -3,7 +3,7 @@ import handlers from './handlers';
 
 dom.responsiveSidebar();
 dom.renderProjects();
-dom.changeProject(0, 0);
+dom.changeLink('inbox');
 
 handlers.resizeHandler();
 handlers.clickHandler();

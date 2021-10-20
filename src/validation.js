@@ -51,7 +51,7 @@ const validation = (() => {
     }
   }
 
-  function editTask(event, projectIndex, taskIndex) {
+  function editTask(event, projectIndex, taskIndex, link) {
     const taskTitle = document.forms['task-form']['task-title'].value;
     const taskPriority = document.forms['task-form']['task-priority'].value;
     const taskSchedule = document.forms['task-form']['task-schedule'].value;
@@ -59,7 +59,7 @@ const validation = (() => {
     event.preventDefault();
 
     if (taskTitle !== '') {
-      tasks.editTask(projectIndex, taskIndex, taskTitle, taskPriority, taskSchedule);
+      tasks.editTask(projectIndex, taskIndex, taskTitle, taskPriority, taskSchedule, link);
       dom.hideElement(dom.formTaskTitleError);
       dom.hideElement(dom.modals);
     } else if (taskTitle === '') {

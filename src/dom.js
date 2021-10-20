@@ -154,18 +154,6 @@ const dom = (() => {
     }
   }
 
-  function activeLink(link) {
-    const navLinks = document.querySelectorAll('a.sidebar-link');
-    navLinks.forEach((elem) => {
-      elem.classList.remove('active');
-    });
-    if (link.classList.contains('sidebar-link-icon')) {
-      link.parentElement.classList.add('active');
-    } else {
-      link.classList.add('active');
-    }
-  }
-
   function renderProjects() {
     // Create link
     projectsList.textContent = '';
@@ -193,83 +181,116 @@ const dom = (() => {
     }
   }
 
-  function selectProject(projectIndex) {
+  function selectLink(projectIndex) {
     if (projects.projectsList.length >= 1) {
+      const allLinks = document.querySelectorAll('a.sidebar-project, a.sidebar-link');
+      const inboxLink = document.querySelector('.link-inbox');
+      const todayLink = document.querySelector('.link-today');
+      const weekLink = document.querySelector('.link-week');
+      const importantLink = document.querySelector('.link-important');
+      const completedLink = document.querySelector('.link-completed');
       const projectLinks = document.querySelectorAll('a.sidebar-project');
-      projectLinks.forEach((elem) => {
+      allLinks.forEach((elem) => {
         elem.classList.remove('active');
       });
-      projectLinks[projectIndex].classList.add('active');
+      if (typeof projectIndex === 'number') {
+        projectLinks[projectIndex].classList.add('active');
+      } else if (projectIndex === 'inbox') {
+        inboxLink.classList.add('active');
+      } else if (projectIndex === 'today') {
+        todayLink.classList.add('active');
+      } else if (projectIndex === 'week') {
+        weekLink.classList.add('active');
+      } else if (projectIndex === 'important') {
+        importantLink.classList.add('active');
+      } else if (projectIndex === 'completed') {
+        completedLink.classList.add('active');
+      }
     }
   }
 
   function renderHeader(projectIndex) {
-    const headerNav = document.querySelector('.todo-header-nav');
-    const headerProject = document.querySelector('.todo-header-project');
+    const headerTitle = document.querySelector('.todo-header-title');
 
     if (projects.projectsList.length >= 1) {
-      headerProject.textContent = projects.projectsList[projectIndex].title;
-      headerNav.textContent = 'Inbox';
-    } else {
-      headerProject.textContent = '';
-      headerNav.textContent = 'Inbox';
+      if (typeof projectIndex === 'number') {
+        headerTitle.textContent = projects.projectsList[projectIndex].title;
+      } else {
+        headerTitle.textContent = projectIndex[0].toUpperCase() + projectIndex.substring(1);
+      }
     }
   }
 
   function renderTasks(projectIndex) {
+    let indexStart;
+    let indexEnd;
     tasksList.textContent = '';
     if (projects.projectsList.length >= 1) {
-      for (let i = 0; i < projects.projectsList[projectIndex].tasks.length; i += 1) {
-        const todoItem = document.createElement('div');
-        todoItem.classList.add('todo-item', 'toggle-task');
-        todoItem.setAttribute('data-project-index', projectIndex);
-        todoItem.setAttribute('data-task-index', i);
-        tasksList.appendChild(todoItem);
-        // Create icon
-        const taskIcon = document.createElement('i');
-        taskIcon.classList.add('far', 'fa-fw', 'toggle-task');
-        if (projects.projectsList[projectIndex].tasks[i].priority === 'low') {
-          taskIcon.classList.add('project-green');
-        } else if (projects.projectsList[projectIndex].tasks[i].priority === 'medium') {
-          taskIcon.classList.add('project-yellow');
-        } else if (projects.projectsList[projectIndex].tasks[i].priority === 'high') {
-          taskIcon.classList.add('project-red');
-        } else {
-          taskIcon.classList.add('project-grey');
+      if (typeof projectIndex === 'number') {
+        indexStart = projectIndex;
+        indexEnd = projectIndex + 1;
+      } else {
+        indexStart = 0;
+        indexEnd = projects.projectsList.length;
+      }
+      for (let j = indexStart; j < indexEnd; j += 1) {
+        for (let i = 0; i < projects.projectsList[j].tasks.length; i += 1) {
+          if (projectIndex === 'important' && projects.projectsList[j].tasks[i].priority !== 'high') {
+            continue;
+          } else if (projectIndex === 'completed' && projects.projectsList[j].tasks[i].done !== true) {
+            continue;
+          }
+          const todoItem = document.createElement('div');
+          todoItem.classList.add('todo-item', 'toggle-task');
+          todoItem.setAttribute('data-project-index', j);
+          todoItem.setAttribute('data-task-index', i);
+          tasksList.appendChild(todoItem);
+          // Create icon
+          const taskIcon = document.createElement('i');
+          taskIcon.classList.add('far', 'fa-fw', 'toggle-task');
+          if (projects.projectsList[j].tasks[i].priority === 'low') {
+            taskIcon.classList.add('project-green');
+          } else if (projects.projectsList[j].tasks[i].priority === 'medium') {
+            taskIcon.classList.add('project-yellow');
+          } else if (projects.projectsList[j].tasks[i].priority === 'high') {
+            taskIcon.classList.add('project-red');
+          } else {
+            taskIcon.classList.add('project-grey');
+          }
+          todoItem.appendChild(taskIcon);
+          // Create title
+          const taskTitle = document.createElement('p');
+          taskTitle.classList.add('todo-item-title', 'toggle-task');
+          taskTitle.textContent = projects.projectsList[j].tasks[i].title;
+          if (projects.projectsList[j].tasks[i].done === true) {
+            taskIcon.classList.add('fa-check-circle');
+            taskTitle.classList.add('done');
+          } else {
+            taskIcon.classList.add('fa-circle');
+            taskTitle.classList.remove('done');
+          }
+          todoItem.appendChild(taskTitle);
+          // Create date
+          if (projects.projectsList[j].tasks[i].schedule !== '') {
+            const taskDate = document.createElement('p');
+            taskDate.classList.add('todo-item-date', 'todo-item-pill', 'toggle-task');
+            taskDate.textContent = projects.projectsList[j].tasks[i].schedule;
+            todoItem.appendChild(taskDate);
+          }
+          // Create project name
+          const taskProject = document.createElement('p');
+          taskProject.classList.add('todo-item-pill', `${projects.projectsList[j].color}-background`, 'toggle-task');
+          taskProject.textContent = projects.projectsList[j].title;
+          todoItem.appendChild(taskProject);
+          // Create edit icon
+          const taskEditIcon = document.createElement('i');
+          taskEditIcon.classList.add('far', 'fa-edit', 'fa-fw', 'edit-task-modal');
+          todoItem.appendChild(taskEditIcon);
+          // Create remove icon
+          const taskRemoveIcon = document.createElement('i');
+          taskRemoveIcon.classList.add('far', 'fa-trash', 'fa-fw', 'remove-task-modal');
+          todoItem.appendChild(taskRemoveIcon);
         }
-        todoItem.appendChild(taskIcon);
-        // Create title
-        const taskTitle = document.createElement('p');
-        taskTitle.classList.add('todo-item-title', 'toggle-task');
-        taskTitle.textContent = projects.projectsList[projectIndex].tasks[i].title;
-        if (projects.projectsList[projectIndex].tasks[i].done === true) {
-          taskIcon.classList.add('fa-check-circle');
-          taskTitle.classList.add('done');
-        } else {
-          taskIcon.classList.add('fa-circle');
-          taskTitle.classList.remove('done');
-        }
-        todoItem.appendChild(taskTitle);
-        // Create date
-        if (projects.projectsList[projectIndex].tasks[i].schedule !== '') {
-          const taskDate = document.createElement('p');
-          taskDate.classList.add('todo-item-date', 'todo-item-pill', 'toggle-task');
-          taskDate.textContent = projects.projectsList[projectIndex].tasks[i].schedule;
-          todoItem.appendChild(taskDate);
-        }
-        // Create project name
-        const taskProject = document.createElement('p');
-        taskProject.classList.add('todo-item-pill', `${projects.projectsList[projectIndex].color}-background`, 'toggle-task');
-        taskProject.textContent = projects.projectsList[projectIndex].title;
-        todoItem.appendChild(taskProject);
-        // Create edit icon
-        const taskEditIcon = document.createElement('i');
-        taskEditIcon.classList.add('far', 'fa-edit', 'fa-fw', 'edit-task-modal');
-        todoItem.appendChild(taskEditIcon);
-        // Create remove icon
-        const taskRemoveIcon = document.createElement('i');
-        taskRemoveIcon.classList.add('far', 'fa-trash', 'fa-fw', 'remove-task-modal');
-        todoItem.appendChild(taskRemoveIcon);
       }
       // Add task line
       const taskAdd = document.createElement('div');
@@ -286,8 +307,8 @@ const dom = (() => {
     }
   }
 
-  function changeProject(projectIndex) {
-    selectProject(projectIndex);
+  function changeLink(projectIndex) {
+    selectLink(projectIndex);
     renderHeader(projectIndex);
     renderTasks(projectIndex);
   }
@@ -306,10 +327,11 @@ const dom = (() => {
     showConfirmModal,
     showElement,
     hideElement,
-    activeLink,
     renderProjects,
     renderTasks,
-    changeProject,
+    selectLink,
+    renderHeader,
+    changeLink,
   };
 })();
 
