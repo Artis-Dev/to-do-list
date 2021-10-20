@@ -19,20 +19,20 @@
 
   <nav class="sidebar">
     <div class="sidebar-project-nav">
-      <a class="sidebar-link active" href="#">
-        <i class="far fa-inbox fa-fw sidebar-link sidebar-link-icon"></i>Inbox
+      <a class="sidebar-link link-inbox" href="#">
+        <i class="far fa-inbox fa-fw sidebar-link link-inbox sidebar-link-icon"></i>Inbox
       </a>
-      <a class="sidebar-link" href="#">
-        <i class="far fa-calendar-day fa-fw sidebar-link sidebar-link-icon"></i>Today
+      <a class="sidebar-link link-today" href="#">
+        <i class="far fa-calendar-day fa-fw sidebar-link link-today sidebar-link-icon"></i>Today
       </a>
-      <a class="sidebar-link" href="#">
-        <i class="far fa-calendar-week fa-fw sidebar-link sidebar-link-icon"></i>Next 7 days
+      <a class="sidebar-link link-week" href="#">
+        <i class="far fa-calendar-week fa-fw sidebar-link link-week sidebar-link-icon"></i>Next 7 days
       </a>
-      <a class="sidebar-link" href="#">
-        <i class="far fa-calendar-star fa-fw sidebar-link sidebar-link-icon"></i>Important
+      <a class="sidebar-link link-important" href="#">
+        <i class="far fa-calendar-star fa-fw sidebar-link link-important sidebar-link-icon"></i>Important
       </a>
-      <a class="sidebar-link" href="#">
-        <i class="far fa-check-double fa-fw sidebar-link sidebar-link-icon"></i>Completed
+      <a class="sidebar-link link-completed" href="#">
+        <i class="far fa-check-double fa-fw sidebar-link link-completed sidebar-link-icon"></i>Completed
       </a>
     </div>
 
@@ -51,7 +51,7 @@
   <main>
     <div class="todo-header">
       <h1>
-        <span class="todo-header-nav"></span> (<span class="todo-header-project"></span>)
+        <span class="todo-header-title"></span>
       </h1>
     </div>
 
@@ -115,12 +115,6 @@
                   <span class="radio-control"><i class="far fa-pencil-alt fa-fw"></i></span>
                 </span>
               </label>
-              <label class="radio radio-before">
-                <span class="radio-input">
-                  <input type="radio" id="project-paint-brush" name="project-icon" value="fa-paint-brush-alt">
-                  <span class="radio-control"><i class="far fa-paint-brush-alt fa-fw"></i></span>
-                </span>
-              </label>
             </div>
           </div>
 
@@ -143,12 +137,6 @@
                 <span class="radio-input">
                   <input type="radio" id="project-red" name="project-color" value="project-red">
                   <span class="radio-control"><i class="far fa-circle fa-fw project-red"></i></span>
-                </span>
-              </label>
-              <label class="radio radio-before">
-                <span class="radio-input">
-                  <input type="radio" id="project-grey" name="project-color" value="project-grey">
-                  <span class="radio-control"><i class="far fa-circle fa-fw project-grey"></i></span>
                 </span>
               </label>
               <label class="radio radio-before">
