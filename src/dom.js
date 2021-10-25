@@ -204,7 +204,9 @@ const dom = (() => {
       projectIcon.classList.add('far', projects.projectsList[i].icon, 'fa-fw', projects.projectsList[i].color, 'sidebar-project', 'sidebar-project-icon');
       projectLink.appendChild(projectIcon);
       // Create title
-      const projectTitle = document.createTextNode(projects.projectsList[i].title);
+      const projectTitle = document.createElement('p');
+      projectTitle.classList.add('sidebar-project');
+      projectTitle.innerText = projects.projectsList[i].title;
       projectLink.appendChild(projectTitle);
       // Create remove icon
       const projectRemoveIcon = document.createElement('i');

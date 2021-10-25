@@ -6,12 +6,12 @@
   --white: #FFFFFF;
   --light-grey: #F6F5F8;
   /* App colors */
-  --project-green: #90dab9;
-  --project-red: #f5a3ab;
-  --project-yellow: #fadd87;
-  --project-light-grey: #cbcdce;
-  --project-blue: #98c1fa;
-  --project-light-blue: #99ebfc;
+  --project-green: #8dd3b3;
+  --project-red: #dd8c94;
+  --project-yellow: #e9ca6d;
+  --project-light-grey: #c3c5c5;
+  --project-blue: #7eaef1;
+  --project-light-blue: #81d9eb;
 }
 
 body {
@@ -152,6 +152,15 @@ header {
 
 .sidebar-projects-title {
   font-weight: 700;
+}
+
+.sidebar-project p {
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 139px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
 }
 
 .add-project-modal,

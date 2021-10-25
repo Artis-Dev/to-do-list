@@ -35,7 +35,11 @@ const projects = (() => {
     projectsList[index].icon = icon;
     projectsList[index].color = color;
     dom.renderProjects();
-    dom.changeLink(link);
+    if (link === undefined) {
+      dom.changeLink(index);
+    } else {
+      dom.changeLink(link);
+    }
     localStorage.setItem('projects', JSON.stringify(projectsList));
   }
 
