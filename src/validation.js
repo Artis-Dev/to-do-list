@@ -19,7 +19,7 @@ const validation = (() => {
     }
   }
 
-  function editProject(event, index) {
+  function editProject(event, index, link) {
     const projectTitle = document.forms['project-form']['project-title'].value;
     const projectIcon = document.forms['project-form']['project-icon'].value;
     const projectColor = document.forms['project-form']['project-color'].value;
@@ -27,7 +27,7 @@ const validation = (() => {
     event.preventDefault();
 
     if (projectTitle !== '') {
-      projects.editProject(index, projectTitle, projectIcon, projectColor);
+      projects.editProject(index, projectTitle, projectIcon, projectColor, link);
       dom.hideElement(dom.formProjectTitleError);
       dom.hideElement(dom.modals);
     } else if (projectTitle === '') {
@@ -39,15 +39,30 @@ const validation = (() => {
     const taskTitle = document.forms['task-form']['task-title'].value;
     const taskPriority = document.forms['task-form']['task-priority'].value;
     const taskSchedule = document.forms['task-form']['task-schedule'].value;
+    const link = document.querySelector('.add-task-modal').getAttribute('data-project-index');
+    let taskProject;
+    if (Number.isNaN(projectIndex)) {
+      taskProject = parseInt(document.forms['task-form']['task-project'].value, 10);
+    } else {
+      taskProject = projectIndex;
+    }
 
     event.preventDefault();
 
-    if (taskTitle !== '') {
-      tasks.createTask(projectIndex, taskTitle, taskPriority, taskSchedule);
+    if (taskTitle !== '' && !Number.isNaN(taskProject)) {
+      tasks.createTask(taskProject, taskTitle, taskPriority, taskSchedule, link);
       dom.hideElement(dom.formTaskTitleError);
+      dom.hideElement(dom.formTaskProjectError);
       dom.hideElement(dom.modals);
     } else if (taskTitle === '') {
       dom.showElement(dom.formTaskTitleError);
+    } else {
+      dom.hideElement(dom.formTaskTitleError);
+    }
+    if (Number.isNaN(taskProject)) {
+      dom.showElement(dom.formTaskProjectError);
+    } else {
+      dom.hideElement(dom.formTaskProjectError);
     }
   }
 
@@ -63,7 +78,7 @@ const validation = (() => {
       dom.hideElement(dom.formTaskTitleError);
       dom.hideElement(dom.modals);
     } else if (taskTitle === '') {
-      dom.showElement(dom.formrTaskTitleError);
+      dom.showElement(dom.formTaskTitleError);
     }
   }
 

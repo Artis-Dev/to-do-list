@@ -71,7 +71,7 @@
         <form id="project-form" name="project-form" method="POST">
 
           <div>
-            <label id="form-label" for="form-project-title">Project title</label>
+            <label id="form-label" for="form-project-title">Project title *</label>
             <input type="text" id="form-project-title" name="project-title" autocomplete="off" placeholder="e.g. Vacation">
             <p class="form-error project-title-error hide">This field can't be empty.</p>
           </div>
@@ -183,7 +183,7 @@
         <form id="task-form" name="task-form" method="POST">
 
           <div>
-            <label id="form-label" for="form-task-title">Task title</label>
+            <label id="form-label" for="form-task-title">Task title *</label>
             <input type="text" id="form-task-title" name="task-title" autocomplete="off" placeholder="e.g. Do chores">
             <p class="form-error task-title-error hide">This field can't be empty.</p>
           </div>
@@ -191,7 +191,7 @@
           <div>
             <label id="form-label" for="form-task-priority">Priority</label>
             <select id="form-task-priority" name="task-priority">
-              <option value="none">Select priority</option>
+              <option value="" disabled selected>Select priority</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -202,6 +202,11 @@
             <label id="form-label" for="form-task-schedule">Schedule</label>
             <input type="date" id="form-task-schedule" name="task-schedule" autocomplete="off">
           </div>
+
+          <div id="select-project">
+            <!-- Generate Select Project box -->
+          </div>
+          <p class="form-error task-project-error hide">This field can't be empty.</p>
 
           <div class="modal-sep"></div>
 

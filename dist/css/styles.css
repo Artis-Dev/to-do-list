@@ -161,14 +161,14 @@ header {
   cursor: pointer;
 }
 
-.add-project-modal {
+.sidebar-projects-header > .add-project-modal {
   padding: 4px 6px;
   border-radius: 6px;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
 
-.add-project-modal:hover {
+.sidebar-projects-header > .add-project-modal:hover {
   background-color: var(--white);
   -webkit-transition: all .2s;
   transition: all .2s;
@@ -263,6 +263,23 @@ main {
   color: var(--white);
 }
 
+.remove-task-modal,
+.edit-task-modal {
+  padding: 6px 0;
+  width: 30px !important;
+  height: 30px;
+  border-radius: 6px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.remove-task-modal:hover,
+.edit-task-modal:hover {
+  background-color: var(--white);
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
 /* Modal */
 .modal {
   position: fixed;
@@ -352,7 +369,8 @@ main {
 #form-project-title,
 #form-task-title,
 #form-task-priority,
-#form-task-schedule {
+#form-task-schedule,
+#form-task-project {
   width: 100%;
   height: 45px;
   padding: 0 12px;
@@ -367,7 +385,8 @@ main {
 #form-project-title:focus,
 #form-task-title:focus,
 #form-task-priority:focus,
-#form-task-schedule:focus {
+#form-task-schedule:focus,
+#form-task-project:focus {
   border-color: var(--grey);
   outline: none;
   -webkit-transition: all .2s;
@@ -379,6 +398,10 @@ main {
   margin: 6px 0 0;
   font-size: 14px;
   color: var(--primary-red);
+}
+
+.task-project-error {
+  margin-top: -14px;
 }
 
 /* Radio buttons styling */

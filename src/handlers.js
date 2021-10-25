@@ -7,7 +7,7 @@ const handlers = (() => {
   function clickHandler() {
     let projectIndex = 0;
     let taskIndex = 0;
-    let link;
+    let link = 'inbox';
     dom.body.addEventListener('click', (e) => {
       // Toggle sidebar
       if (e.target.classList.contains('toggle-sidebar')) {
@@ -19,13 +19,13 @@ const handlers = (() => {
       // Nav links
       } else if (e.target.classList.contains('link-today')) {
         console.log('Today');
-        dom.selectLink('today');
-        dom.renderHeader('today');
+        link = 'today';
+        dom.changeLink('today');
       // Nav links
       } else if (e.target.classList.contains('link-week')) {
         console.log('Week');
-        dom.selectLink('week');
-        dom.renderHeader('week');
+        link = 'week';
+        dom.changeLink('week');
       // Nav links
       } else if (e.target.classList.contains('link-important')) {
         link = 'important';
@@ -45,7 +45,6 @@ const handlers = (() => {
         dom.showProjectModal('addProject');
       // Edit project modal open
       } else if (e.target.classList.contains('edit-project-modal')) {
-        link = undefined;
         projectIndex = parseInt(e.target.parentElement.getAttribute('data-index'), 10);
         dom.showProjectModal('editProject', projectIndex);
       // Remove project modal open
@@ -73,7 +72,7 @@ const handlers = (() => {
         validation.addProject(e);
       // Edit project
       } else if (e.target.classList.contains('edit-project')) {
-        validation.editProject(e, projectIndex);
+        validation.editProject(e, projectIndex, link);
       // Remove project
       } else if (e.target.classList.contains('remove-project')) {
         projects.removeProject(projectIndex);

@@ -14,7 +14,11 @@ const tasks = (() => {
   function createTask(projectIndex, title, priority = 0, schedule = 0, link = projectIndex) {
     const newTask = new Task(title, priority, schedule);
     projects.projectsList[projectIndex].tasks.push(newTask);
-    dom.renderTasks(link);
+    if (Number.isNaN(parseInt(link, 10))) {
+      dom.changeLink(link);
+    } else {
+      dom.renderTasks(projectIndex);
+    }
   }
 
   function toggleTask(projectIndex, taskIndex, link = projectIndex) {

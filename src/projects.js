@@ -21,12 +21,12 @@ const projects = (() => {
     dom.changeLink(projectsList.length - 1);
   }
 
-  function editProject(index, title, icon, color) {
+  function editProject(index, title, icon, color, link) {
     projectsList[index].title = title;
     projectsList[index].icon = icon;
     projectsList[index].color = color;
     dom.renderProjects();
-    dom.changeLink(index);
+    dom.changeLink(link);
   }
 
   function removeProject(index) {

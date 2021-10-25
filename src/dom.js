@@ -14,6 +14,7 @@ const dom = (() => {
   const taskForm = document.querySelector('#task-form');
   const formProjectTitleError = document.querySelector('.project-title-error');
   const formTaskTitleError = document.querySelector('.task-title-error');
+  const formTaskProjectError = document.querySelector('.task-project-error');
 
   function responsiveSidebar() {
     if (window.innerWidth <= 960) {
@@ -41,11 +42,13 @@ const dom = (() => {
     const modalHeading = document.querySelector('.project-modal-title');
     const modalSubmitButton = document.querySelector('#project-button');
 
+    projectForm.reset();
+    dom.hideElement(dom.formProjectTitleError);
+
     projectModal.classList.remove('hide');
     projectModal.classList.add('display');
 
     if (modal === 'addProject') {
-      projectForm.reset();
       modalHeading.textContent = 'New project';
       modalSubmitButton.textContent = 'Add';
       modalSubmitButton.classList.remove('edit-project');
@@ -70,16 +73,49 @@ const dom = (() => {
     }
   }
 
-  function showTaskModal(modal, projectIndex = false, taskIndex = false) {
+  function showTaskModal(modal, projectIndex, taskIndex = false) {
     const modalHeading = document.querySelector('.task-modal-title');
+    const selectProject = document.querySelector('#select-project');
     const modalSubmitButton = document.querySelector('#task-button');
+
+    taskForm.reset();
+    dom.hideElement(dom.formTaskTitleError);
+    dom.hideElement(dom.formTaskProjectError);
 
     taskModal.classList.remove('hide');
     taskModal.classList.add('display');
 
     if (modal === 'addTask') {
-      taskForm.reset();
       modalHeading.textContent = 'New task';
+
+      selectProject.innerText = '';
+      if (Number.isNaN(projectIndex)) {
+        const label = document.createElement('label');
+        label.id = 'form-label';
+        label.innerText = 'Project *';
+        label.setAttribute('for', 'form-task-project');
+        selectProject.appendChild(label);
+
+        const select = document.createElement('select');
+        select.id = 'form-task-project';
+        select.setAttribute('name', 'task-project');
+        selectProject.appendChild(select);
+
+        const option = document.createElement('option');
+        option.setAttribute('value', '');
+        option.selected = true;
+        option.disabled = true;
+        option.innerText = 'Select project';
+
+        select.appendChild(option);
+        for (let i = 0; i < projects.projectsList.length; i += 1) {
+          const newOption = document.createElement('option');
+          newOption.setAttribute('value', i);
+          newOption.innerText = projects.projectsList[i].title;
+          select.appendChild(newOption);
+        }
+      }
+
       modalSubmitButton.textContent = 'Add';
       modalSubmitButton.classList.remove('edit-task');
       modalSubmitButton.classList.add('add-task');
@@ -182,42 +218,38 @@ const dom = (() => {
   }
 
   function selectLink(projectIndex) {
-    if (projects.projectsList.length >= 1) {
-      const allLinks = document.querySelectorAll('a.sidebar-project, a.sidebar-link');
-      const inboxLink = document.querySelector('.link-inbox');
-      const todayLink = document.querySelector('.link-today');
-      const weekLink = document.querySelector('.link-week');
-      const importantLink = document.querySelector('.link-important');
-      const completedLink = document.querySelector('.link-completed');
-      const projectLinks = document.querySelectorAll('a.sidebar-project');
-      allLinks.forEach((elem) => {
-        elem.classList.remove('active');
-      });
-      if (typeof projectIndex === 'number') {
-        projectLinks[projectIndex].classList.add('active');
-      } else if (projectIndex === 'inbox') {
-        inboxLink.classList.add('active');
-      } else if (projectIndex === 'today') {
-        todayLink.classList.add('active');
-      } else if (projectIndex === 'week') {
-        weekLink.classList.add('active');
-      } else if (projectIndex === 'important') {
-        importantLink.classList.add('active');
-      } else if (projectIndex === 'completed') {
-        completedLink.classList.add('active');
-      }
+    const allLinks = document.querySelectorAll('a.sidebar-project, a.sidebar-link');
+    const inboxLink = document.querySelector('.link-inbox');
+    const todayLink = document.querySelector('.link-today');
+    const weekLink = document.querySelector('.link-week');
+    const importantLink = document.querySelector('.link-important');
+    const completedLink = document.querySelector('.link-completed');
+    const projectLinks = document.querySelectorAll('a.sidebar-project');
+    allLinks.forEach((elem) => {
+      elem.classList.remove('active');
+    });
+    if (typeof projectIndex === 'number') {
+      projectLinks[projectIndex].classList.add('active');
+    } else if (projectIndex === 'inbox') {
+      inboxLink.classList.add('active');
+    } else if (projectIndex === 'today') {
+      todayLink.classList.add('active');
+    } else if (projectIndex === 'week') {
+      weekLink.classList.add('active');
+    } else if (projectIndex === 'important') {
+      importantLink.classList.add('active');
+    } else if (projectIndex === 'completed') {
+      completedLink.classList.add('active');
     }
   }
 
   function renderHeader(projectIndex) {
     const headerTitle = document.querySelector('.todo-header-title');
 
-    if (projects.projectsList.length >= 1) {
-      if (typeof projectIndex === 'number') {
-        headerTitle.textContent = projects.projectsList[projectIndex].title;
-      } else {
-        headerTitle.textContent = projectIndex[0].toUpperCase() + projectIndex.substring(1);
-      }
+    if (typeof projectIndex === 'number') {
+      headerTitle.textContent = projects.projectsList[projectIndex].title;
+    } else {
+      headerTitle.textContent = projectIndex[0].toUpperCase() + projectIndex.substring(1);
     }
   }
 
@@ -235,7 +267,11 @@ const dom = (() => {
       }
       for (let j = indexStart; j < indexEnd; j += 1) {
         for (let i = 0; i < projects.projectsList[j].tasks.length; i += 1) {
-          if (projectIndex === 'important' && projects.projectsList[j].tasks[i].priority !== 'high') {
+          if (projectIndex === 'today' && projects.projectsList[j].tasks[i].schedule === '') {
+            continue;
+          } else if (projectIndex === 'week' && projects.projectsList[j].tasks[i].schedule === '') {
+            continue;
+          } else if (projectIndex === 'important' && projects.projectsList[j].tasks[i].priority !== 'high') {
             continue;
           } else if (projectIndex === 'completed' && projects.projectsList[j].tasks[i].done !== true) {
             continue;
@@ -304,6 +340,18 @@ const dom = (() => {
       taskAddTitle.classList.add('todo-item-title', 'add-task-modal');
       taskAddTitle.textContent = 'Add new task';
       taskAdd.appendChild(taskAddTitle);
+    } else {
+      // No project warning
+      const taskAdd = document.createElement('div');
+      taskAdd.classList.add('todo-item-add', 'add-project-modal');
+      tasksList.appendChild(taskAdd);
+      const taskAddIcon = document.createElement('i');
+      taskAddIcon.classList.add('far', 'fa-exclamation-circle', 'fa-fw', 'project-red', 'add-project-modal');
+      taskAdd.appendChild(taskAddIcon);
+      const taskAddTitle = document.createElement('p');
+      taskAddTitle.classList.add('todo-item-title', 'add-project-modal');
+      taskAddTitle.textContent = 'You don\'t have any projects, create one.';
+      taskAdd.appendChild(taskAddTitle);
     }
   }
 
@@ -320,6 +368,7 @@ const dom = (() => {
     modals,
     formProjectTitleError,
     formTaskTitleError,
+    formTaskProjectError,
     responsiveSidebar,
     toggleSidebar,
     showProjectModal,
@@ -329,8 +378,6 @@ const dom = (() => {
     hideElement,
     renderProjects,
     renderTasks,
-    selectLink,
-    renderHeader,
     changeLink,
   };
 })();
