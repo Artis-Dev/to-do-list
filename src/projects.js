@@ -1,9 +1,17 @@
 import dom from './dom';
 
 const projects = (() => {
-  const projectsList = [{
-    title: 'Demo', icon: 'fa-home', color: 'project-green', tasks: [],
-  }];
+  let projectsList = [];
+
+  // Local storage
+  if (localStorage.getItem('projects') === null) {
+    projectsList = [{
+      title: 'Demo', icon: 'fa-home', color: 'project-green', tasks: [],
+    }];
+  } else {
+    const projectsFromStorage = JSON.parse(localStorage.getItem('projects'));
+    projectsList = projectsFromStorage;
+  }
 
   class Project {
     constructor(title, icon, color) {
@@ -19,6 +27,7 @@ const projects = (() => {
     projectsList.push(newProject);
     dom.renderProjects();
     dom.changeLink(projectsList.length - 1);
+    localStorage.setItem('projects', JSON.stringify(projectsList));
   }
 
   function editProject(index, title, icon, color, link) {
@@ -27,6 +36,7 @@ const projects = (() => {
     projectsList[index].color = color;
     dom.renderProjects();
     dom.changeLink(link);
+    localStorage.setItem('projects', JSON.stringify(projectsList));
   }
 
   function removeProject(index) {
@@ -34,6 +44,7 @@ const projects = (() => {
     dom.hideElement(dom.modals);
     dom.renderProjects();
     dom.changeLink('inbox');
+    localStorage.setItem('projects', JSON.stringify(projectsList));
   }
 
   return {

@@ -19,6 +19,7 @@ const tasks = (() => {
     } else {
       dom.renderTasks(projectIndex);
     }
+    localStorage.setItem('projects', JSON.stringify(projects.projectsList));
   }
 
   function toggleTask(projectIndex, taskIndex, link = projectIndex) {
@@ -28,6 +29,7 @@ const tasks = (() => {
       projects.projectsList[projectIndex].tasks[taskIndex].done = true;
     }
     dom.renderTasks(link);
+    localStorage.setItem('projects', JSON.stringify(projects.projectsList));
   }
 
   function editTask(projectIndex, taskIndex, title, priority, schedule, link = projectIndex) {
@@ -35,12 +37,14 @@ const tasks = (() => {
     projects.projectsList[projectIndex].tasks[taskIndex].priority = priority;
     projects.projectsList[projectIndex].tasks[taskIndex].schedule = schedule;
     dom.renderTasks(link);
+    localStorage.setItem('projects', JSON.stringify(projects.projectsList));
   }
 
   function removeTask(projectIndex, taskIndex, link = projectIndex) {
     projects.projectsList[projectIndex].tasks.splice(taskIndex, 1);
     dom.hideElement(dom.modals);
     dom.renderTasks(link);
+    localStorage.setItem('projects', JSON.stringify(projects.projectsList));
   }
 
   return {
