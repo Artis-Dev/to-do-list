@@ -1,3 +1,4 @@
+import { format, differenceInDays, parseISO } from 'date-fns';
 import projects from './projects';
 
 const dom = (() => {
@@ -258,6 +259,8 @@ const dom = (() => {
   function renderTasks(projectIndex) {
     let indexStart;
     let indexEnd;
+    const currDate = format(new Date(), 'yyyy-MM-dd');
+
     tasksList.textContent = '';
     if (projects.projectsList.length >= 1) {
       if (typeof projectIndex === 'number') {
@@ -269,9 +272,9 @@ const dom = (() => {
       }
       for (let j = indexStart; j < indexEnd; j += 1) {
         for (let i = 0; i < projects.projectsList[j].tasks.length; i += 1) {
-          if (projectIndex === 'today' && projects.projectsList[j].tasks[i].schedule === '') {
+          if (projectIndex === 'today' && projects.projectsList[j].tasks[i].schedule !== currDate) {
             continue;
-          } else if (projectIndex === 'week' && projects.projectsList[j].tasks[i].schedule === '') {
+          } else if (projectIndex === 'week' && !(differenceInDays(parseISO(projects.projectsList[j].tasks[i].schedule), parseISO(currDate)) >= 0 && differenceInDays(parseISO(projects.projectsList[j].tasks[i].schedule), parseISO(currDate)) <= 7)) {
             continue;
           } else if (projectIndex === 'important' && projects.projectsList[j].tasks[i].priority !== 'high') {
             continue;

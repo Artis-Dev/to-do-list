@@ -18,12 +18,10 @@ const handlers = (() => {
         dom.changeLink('inbox');
       // Nav links
       } else if (e.target.classList.contains('link-today')) {
-        console.log('Today');
         link = 'today';
         dom.changeLink('today');
       // Nav links
       } else if (e.target.classList.contains('link-week')) {
-        console.log('Week');
         link = 'week';
         dom.changeLink('week');
       // Nav links
