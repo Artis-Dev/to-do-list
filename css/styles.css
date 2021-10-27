@@ -207,6 +207,10 @@ main {
   margin-left: 0;
 }
 
+.main-blur {
+  filter: blur(3px);
+}
+
 .todo-header {
   margin-bottom: 40px;
 }
