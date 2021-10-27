@@ -55,6 +55,7 @@ const handlers = (() => {
         dom.showTaskModal('addTask', projectIndex);
       // Edit task modal open
       } else if (e.target.classList.contains('edit-task-modal')) {
+        projectIndex = parseInt(e.target.parentElement.getAttribute('data-project-index'), 10);
         taskIndex = parseInt(e.target.parentElement.getAttribute('data-task-index'), 10);
         dom.showTaskModal('editTask', projectIndex, taskIndex);
       // Remove task modal open

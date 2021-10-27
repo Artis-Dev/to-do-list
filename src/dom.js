@@ -129,11 +129,31 @@ const dom = (() => {
       const taskPriority = document.querySelector('#form-task-priority');
       const taskSchedule = document.querySelector('#form-task-schedule');
 
+      modalHeading.textContent = 'Edit task';
+
       taskTitle.value = currentTaskTitle;
       taskPriority.value = currentTaskPriority;
       taskSchedule.value = currentTaskSchedule;
 
-      modalHeading.textContent = 'Edit project';
+      selectProject.innerText = '';
+      const label = document.createElement('label');
+      label.id = 'form-label';
+      label.innerText = 'Project';
+      label.setAttribute('for', 'form-task-project');
+      selectProject.appendChild(label);
+
+      const select = document.createElement('select');
+      select.id = 'form-task-project';
+      select.disabled = true;
+      selectProject.appendChild(select);
+
+      const option = document.createElement('option');
+      option.setAttribute('value', '');
+      option.selected = true;
+      option.innerText = projects.projectsList[projectIndex].title;
+
+      select.appendChild(option);
+
       modalSubmitButton.textContent = 'Edit';
       modalSubmitButton.classList.remove('add-task');
       modalSubmitButton.classList.add('edit-task');
