@@ -251,8 +251,10 @@ const dom = (() => {
 
     if (typeof projectIndex === 'number') {
       headerTitle.textContent = projects.projectsList[projectIndex].title;
+      document.title = `${projects.projectsList[projectIndex].title} - TODO`;
     } else {
       headerTitle.textContent = projectIndex[0].toUpperCase() + projectIndex.substring(1);
+      document.title = `${projectIndex[0].toUpperCase() + projectIndex.substring(1)} - TODO`;
     }
   }
 
@@ -320,7 +322,7 @@ const dom = (() => {
           }
           // Create project name
           const taskProject = document.createElement('p');
-          taskProject.classList.add('todo-item-pill', `${projects.projectsList[j].color}-background`, 'toggle-task');
+          taskProject.classList.add('todo-item-pill', `${projects.projectsList[j].color}-background`, 'toggle-task', 'todo-item-project-name');
           taskProject.textContent = projects.projectsList[j].title;
           todoItem.appendChild(taskProject);
           // Create edit icon

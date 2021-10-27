@@ -6,7 +6,7 @@ const projects = (() => {
   // Local storage
   if (localStorage.getItem('projects') === null) {
     projectsList = [{
-      title: 'Demo', icon: 'fa-home', color: 'project-green', tasks: [],
+      title: 'Demo Project', icon: 'fa-home', color: 'project-grey', tasks: [],
     }];
   } else {
     const projectsFromStorage = JSON.parse(localStorage.getItem('projects'));
