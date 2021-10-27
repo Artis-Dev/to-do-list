@@ -25,7 +25,7 @@ const dom = (() => {
     } else {
       sidebar.classList.remove('sidebar-hide');
       sidebar.classList.add('sidebar-show');
-      main.classList.remove('main-mobile');
+      main.classList.remove('main-mobile', 'main-blur');
     }
   }
 
@@ -33,9 +33,11 @@ const dom = (() => {
     if (!sidebar.classList.contains('sidebar-show')) {
       sidebar.classList.remove('sidebar-hide');
       sidebar.classList.add('sidebar-show');
+      main.classList.add('main-blur');
     } else if (sidebar.classList.contains('sidebar-show')) {
       sidebar.classList.remove('sidebar-show');
       sidebar.classList.add('sidebar-hide');
+      main.classList.remove('main-blur');
     }
   }
 
