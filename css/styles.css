@@ -6,12 +6,12 @@
   --white: #FFFFFF;
   --light-grey: #F6F5F8;
   /* App colors */
-  --project-green: #8dd3b3;
+  --project-grey: #50514F;
   --project-red: #dd8c94;
   --project-yellow: #e9ca6d;
-  --project-light-grey: #c3c5c5;
-  --project-blue: #7eaef1;
+  --project-green: #8dd3b3;
   --project-light-blue: #81d9eb;
+  --project-blue: #7eaef1;
 }
 
 body {
@@ -22,19 +22,19 @@ body {
 
 p, h1 { margin: 0; }
 
-.project-green { color: var(--project-green); }
+.project-grey { color: var(--project-grey); }
 .project-red { color: var(--project-red); }
 .project-yellow { color: var(--project-yellow); }
-.project-light-grey { color: var(--project-light-grey); }
-.project-blue { color: var(--project-blue); }
+.project-green { color: var(--project-green); }
 .project-light-blue { color: var(--project-light-blue); }
+.project-blue { color: var(--project-blue); }
 
-.project-green-background { background-color: var(--project-green); }
+.project-grey-background { background-color: var(--project-grey); }
 .project-red-background { background-color: var(--project-red); }
 .project-yellow-background { background-color: var(--project-yellow); }
-.project-light-grey-background { background-color: var(--project-light-grey); }
-.project-blue-background { background-color: var(--project-blue); }
+.project-green-background { background-color: var(--project-green); }
 .project-light-blue-background { background-color: var(--project-light-blue); }
+.project-blue-background { background-color: var(--project-blue); }
 
 .hide { display: none; }
 .display { display: block; }
@@ -255,6 +255,15 @@ main {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  max-height: 42px;
+  overflow: hidden;
+  vertical-align: middle;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
 }
 
 .todo-item-title.done {
@@ -265,6 +274,7 @@ main {
   font-size: 15px;
   padding: 4px 6px;
   border-radius: 14px;
+  white-space: nowrap;
 }
 
 .todo-item-date {
@@ -363,11 +373,6 @@ main {
 #task-form > div:not(:last-child) {
   margin-bottom: 20px;
 }
-
-/* #project-form > label,
-#task-form > label {
-  margin-bottom: 6px;
-} */
 
 #project-form label,
 #task-form label {
@@ -516,5 +521,8 @@ main {
 @media (max-width: 960px) {
   .toggle-sidebar {
     display: inline-block !important;
+  }
+  .todo-item-project-name {
+    display: none;
   }
 }
