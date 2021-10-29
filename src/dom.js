@@ -62,8 +62,12 @@ const dom = (() => {
       const currentProjectColor = projects.projectsList[index].color;
 
       const projectTitle = document.querySelector('#form-project-title');
-      const projectIcon = document.querySelector(`input[value=${currentProjectIcon}]`);
-      const projectColor = document.querySelector(`input[value=${currentProjectColor}]`);
+      const projectIcon = document.querySelector(
+        `input[value=${currentProjectIcon}]`
+      );
+      const projectColor = document.querySelector(
+        `input[value=${currentProjectColor}]`
+      );
 
       projectTitle.value = currentProjectTitle;
       projectIcon.checked = true;
@@ -123,9 +127,12 @@ const dom = (() => {
       modalSubmitButton.classList.remove('edit-task');
       modalSubmitButton.classList.add('add-task');
     } else if (modal === 'editTask') {
-      const currentTaskTitle = projects.projectsList[projectIndex].tasks[taskIndex].title;
-      const currentTaskPriority = projects.projectsList[projectIndex].tasks[taskIndex].priority;
-      const currentTaskSchedule = projects.projectsList[projectIndex].tasks[taskIndex].schedule;
+      const currentTaskTitle =
+        projects.projectsList[projectIndex].tasks[taskIndex].title;
+      const currentTaskPriority =
+        projects.projectsList[projectIndex].tasks[taskIndex].priority;
+      const currentTaskSchedule =
+        projects.projectsList[projectIndex].tasks[taskIndex].schedule;
 
       const taskTitle = document.querySelector('#form-task-title');
       const taskPriority = document.querySelector('#form-task-priority');
@@ -166,8 +173,12 @@ const dom = (() => {
     const modalHeading = document.querySelector('.confirm-modal-title');
     const modalContent = document.querySelector('.confirm-modal-content');
     const modalSubmitButton = document.querySelector('#confirm-button');
-    const modalContentPrefix = document.createTextNode('You are going to remove ');
-    const modalContentPostfix = document.createTextNode('. This action cannot be undone.');
+    const modalContentPrefix = document.createTextNode(
+      'You are going to remove '
+    );
+    const modalContentPostfix = document.createTextNode(
+      '. This action cannot be undone.'
+    );
     const title = document.createElement('span');
 
     confirmModal.classList.remove('hide');
@@ -187,7 +198,8 @@ const dom = (() => {
       modalSubmitButton.classList.add('remove-project');
     } else if (modal === 'removeTask') {
       modalHeading.textContent = 'Remove task';
-      title.textContent = projects.projectsList[projectIndex].tasks[taskIndex].title;
+      title.textContent =
+        projects.projectsList[projectIndex].tasks[taskIndex].title;
       modalContent.appendChild(modalContentPrefix);
       modalContent.appendChild(title);
       modalContent.appendChild(modalContentPostfix);
@@ -224,7 +236,14 @@ const dom = (() => {
       projectsList.appendChild(projectLink);
       // Create icon
       const projectIcon = document.createElement('i');
-      projectIcon.classList.add('far', projects.projectsList[i].icon, 'fa-fw', projects.projectsList[i].color, 'sidebar-project', 'sidebar-project-icon');
+      projectIcon.classList.add(
+        'far',
+        projects.projectsList[i].icon,
+        'fa-fw',
+        projects.projectsList[i].color,
+        'sidebar-project',
+        'sidebar-project-icon'
+      );
       projectLink.appendChild(projectIcon);
       // Create title
       const projectTitle = document.createElement('p');
@@ -233,7 +252,11 @@ const dom = (() => {
       projectLink.appendChild(projectTitle);
       // Create remove icon
       const projectRemoveIcon = document.createElement('i');
-      projectRemoveIcon.classList.add('far', 'fa-trash', 'remove-project-modal');
+      projectRemoveIcon.classList.add(
+        'far',
+        'fa-trash',
+        'remove-project-modal'
+      );
       projectLink.appendChild(projectRemoveIcon);
       // Create edit icon
       const projectEditIcon = document.createElement('i');
@@ -243,7 +266,9 @@ const dom = (() => {
   }
 
   function selectLink(projectIndex) {
-    const allLinks = document.querySelectorAll('a.sidebar-project, a.sidebar-link');
+    const allLinks = document.querySelectorAll(
+      'a.sidebar-project, a.sidebar-link'
+    );
     const inboxLink = document.querySelector('.link-inbox');
     const todayLink = document.querySelector('.link-today');
     const weekLink = document.querySelector('.link-week');
@@ -275,8 +300,11 @@ const dom = (() => {
       headerTitle.textContent = projects.projectsList[projectIndex].title;
       document.title = `${projects.projectsList[projectIndex].title} - TODO`;
     } else {
-      headerTitle.textContent = projectIndex[0].toUpperCase() + projectIndex.substring(1);
-      document.title = `${projectIndex[0].toUpperCase() + projectIndex.substring(1)} - TODO`;
+      headerTitle.textContent =
+        projectIndex[0].toUpperCase() + projectIndex.substring(1);
+      document.title = `${
+        projectIndex[0].toUpperCase() + projectIndex.substring(1)
+      } - TODO`;
     }
   }
 
@@ -296,13 +324,34 @@ const dom = (() => {
       }
       for (let j = indexStart; j < indexEnd; j += 1) {
         for (let i = 0; i < projects.projectsList[j].tasks.length; i += 1) {
-          if (projectIndex === 'today' && projects.projectsList[j].tasks[i].schedule !== currDate) {
+          if (
+            projectIndex === 'today' &&
+            projects.projectsList[j].tasks[i].schedule !== currDate
+          ) {
             continue;
-          } else if (projectIndex === 'week' && !(differenceInDays(parseISO(projects.projectsList[j].tasks[i].schedule), parseISO(currDate)) >= 0 && differenceInDays(parseISO(projects.projectsList[j].tasks[i].schedule), parseISO(currDate)) <= 7)) {
+          } else if (
+            projectIndex === 'week' &&
+            !(
+              differenceInDays(
+                parseISO(projects.projectsList[j].tasks[i].schedule),
+                parseISO(currDate)
+              ) >= 0 &&
+              differenceInDays(
+                parseISO(projects.projectsList[j].tasks[i].schedule),
+                parseISO(currDate)
+              ) <= 7
+            )
+          ) {
             continue;
-          } else if (projectIndex === 'important' && projects.projectsList[j].tasks[i].priority !== 'high') {
+          } else if (
+            projectIndex === 'important' &&
+            projects.projectsList[j].tasks[i].priority !== 'high'
+          ) {
             continue;
-          } else if (projectIndex === 'completed' && projects.projectsList[j].tasks[i].done !== true) {
+          } else if (
+            projectIndex === 'completed' &&
+            projects.projectsList[j].tasks[i].done !== true
+          ) {
             continue;
           }
           const todoItem = document.createElement('div');
@@ -338,22 +387,41 @@ const dom = (() => {
           // Create date
           if (projects.projectsList[j].tasks[i].schedule !== '') {
             const taskDate = document.createElement('p');
-            taskDate.classList.add('todo-item-date', 'todo-item-pill', 'toggle-task');
+            taskDate.classList.add(
+              'todo-item-date',
+              'todo-item-pill',
+              'toggle-task'
+            );
             taskDate.textContent = projects.projectsList[j].tasks[i].schedule;
             todoItem.appendChild(taskDate);
           }
           // Create project name
           const taskProject = document.createElement('p');
-          taskProject.classList.add('todo-item-pill', `${projects.projectsList[j].color}-background`, 'toggle-task', 'todo-item-project-name');
+          taskProject.classList.add(
+            'todo-item-pill',
+            `${projects.projectsList[j].color}-background`,
+            'toggle-task',
+            'todo-item-project-name'
+          );
           taskProject.textContent = projects.projectsList[j].title;
           todoItem.appendChild(taskProject);
           // Create edit icon
           const taskEditIcon = document.createElement('i');
-          taskEditIcon.classList.add('far', 'fa-edit', 'fa-fw', 'edit-task-modal');
+          taskEditIcon.classList.add(
+            'far',
+            'fa-edit',
+            'fa-fw',
+            'edit-task-modal'
+          );
           todoItem.appendChild(taskEditIcon);
           // Create remove icon
           const taskRemoveIcon = document.createElement('i');
-          taskRemoveIcon.classList.add('far', 'fa-trash', 'fa-fw', 'remove-task-modal');
+          taskRemoveIcon.classList.add(
+            'far',
+            'fa-trash',
+            'fa-fw',
+            'remove-task-modal'
+          );
           todoItem.appendChild(taskRemoveIcon);
         }
       }
@@ -375,11 +443,17 @@ const dom = (() => {
       taskAdd.classList.add('todo-item-add', 'add-project-modal');
       tasksList.appendChild(taskAdd);
       const taskAddIcon = document.createElement('i');
-      taskAddIcon.classList.add('far', 'fa-exclamation-circle', 'fa-fw', 'project-red', 'add-project-modal');
+      taskAddIcon.classList.add(
+        'far',
+        'fa-exclamation-circle',
+        'fa-fw',
+        'project-red',
+        'add-project-modal'
+      );
       taskAdd.appendChild(taskAddIcon);
       const taskAddTitle = document.createElement('p');
       taskAddTitle.classList.add('todo-item-title', 'add-project-modal');
-      taskAddTitle.textContent = 'You don\'t have any projects, create one.';
+      taskAddTitle.textContent = "You don't have any projects, create one.";
       taskAdd.appendChild(taskAddTitle);
     }
   }

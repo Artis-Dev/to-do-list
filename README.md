@@ -19,8 +19,10 @@ From The Odin Project's [curriculum](https://www.theodinproject.com/paths/full-s
 * Visual Studio Code
 * Linux terminal
 * Git and GitHub
-* ESLint + Airbnb JavaScript Style Guide
 * webpack
+* ESLint + Airbnb JavaScript Style Guide
+* Prettier
+
 
 ### Third party code
 

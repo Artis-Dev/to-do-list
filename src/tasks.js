@@ -11,7 +11,13 @@ const tasks = (() => {
     }
   }
 
-  function createTask(projectIndex, title, priority = '', schedule = '', link = projectIndex) {
+  function createTask(
+    projectIndex,
+    title,
+    priority = '',
+    schedule = '',
+    link = projectIndex
+  ) {
     const newTask = new Task(title, priority, schedule);
     projects.projectsList[projectIndex].tasks.push(newTask);
     if (Number.isNaN(parseInt(link, 10))) {
@@ -32,7 +38,14 @@ const tasks = (() => {
     localStorage.setItem('projects', JSON.stringify(projects.projectsList));
   }
 
-  function editTask(projectIndex, taskIndex, title, priority, schedule, link = projectIndex) {
+  function editTask(
+    projectIndex,
+    taskIndex,
+    title,
+    priority,
+    schedule,
+    link = projectIndex
+  ) {
     projects.projectsList[projectIndex].tasks[taskIndex].title = title;
     projects.projectsList[projectIndex].tasks[taskIndex].priority = priority;
     projects.projectsList[projectIndex].tasks[taskIndex].schedule = schedule;
