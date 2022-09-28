@@ -23,7 +23,6 @@ From The Odin Project's [curriculum](https://www.theodinproject.com/paths/full-s
 * ESLint + Airbnb JavaScript Style Guide
 * Prettier
 
-
 ### Third party code
 
 * [modern-normalize](https://github.com/sindresorhus/modern-normalize)
