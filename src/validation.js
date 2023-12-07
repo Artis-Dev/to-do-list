@@ -32,7 +32,7 @@ const validation = (() => {
         projectTitle,
         projectIcon,
         projectColor,
-        link
+        link,
       );
       dom.hideElement(dom.formProjectTitleError);
       dom.hideElement(dom.modals);
@@ -52,7 +52,7 @@ const validation = (() => {
     if (Number.isNaN(projectIndex)) {
       taskProject = parseInt(
         document.forms['task-form']['task-project'].value,
-        10
+        10,
       );
     } else {
       taskProject = projectIndex;
@@ -66,7 +66,7 @@ const validation = (() => {
         taskTitle,
         taskPriority,
         taskSchedule,
-        link
+        link,
       );
       dom.hideElement(dom.formTaskTitleError);
       dom.hideElement(dom.formTaskProjectError);
@@ -97,7 +97,7 @@ const validation = (() => {
         taskTitle,
         taskPriority,
         taskSchedule,
-        link
+        link,
       );
       dom.hideElement(dom.formTaskTitleError);
       dom.hideElement(dom.modals);

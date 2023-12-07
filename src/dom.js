@@ -19,6 +19,9 @@ const dom = (() => {
 
   function responsiveSidebar() {
     if (window.innerWidth <= 960) {
+      if (main.classList.contains('main-mobile')) {
+        return;
+      }
       sidebar.classList.remove('sidebar-show');
       sidebar.classList.add('sidebar-hide');
       main.classList.add('main-mobile');
@@ -63,10 +66,10 @@ const dom = (() => {
 
       const projectTitle = document.querySelector('#form-project-title');
       const projectIcon = document.querySelector(
-        `input[value=${currentProjectIcon}]`
+        `input[value=${currentProjectIcon}]`,
       );
       const projectColor = document.querySelector(
-        `input[value=${currentProjectColor}]`
+        `input[value=${currentProjectColor}]`,
       );
 
       projectTitle.value = currentProjectTitle;
@@ -174,10 +177,10 @@ const dom = (() => {
     const modalContent = document.querySelector('.confirm-modal-content');
     const modalSubmitButton = document.querySelector('#confirm-button');
     const modalContentPrefix = document.createTextNode(
-      'You are going to remove '
+      'You are going to remove ',
     );
     const modalContentPostfix = document.createTextNode(
-      '. This action cannot be undone.'
+      '. This action cannot be undone.',
     );
     const title = document.createElement('span');
 
@@ -242,7 +245,7 @@ const dom = (() => {
         'fa-fw',
         projects.projectsList[i].color,
         'sidebar-project',
-        'sidebar-project-icon'
+        'sidebar-project-icon',
       );
       projectLink.appendChild(projectIcon);
       // Create title
@@ -255,7 +258,7 @@ const dom = (() => {
       projectRemoveIcon.classList.add(
         'far',
         'fa-trash',
-        'remove-project-modal'
+        'remove-project-modal',
       );
       projectLink.appendChild(projectRemoveIcon);
       // Create edit icon
@@ -267,7 +270,7 @@ const dom = (() => {
 
   function selectLink(projectIndex) {
     const allLinks = document.querySelectorAll(
-      'a.sidebar-project, a.sidebar-link'
+      'a.sidebar-project, a.sidebar-link',
     );
     const inboxLink = document.querySelector('.link-inbox');
     const todayLink = document.querySelector('.link-today');
@@ -334,11 +337,11 @@ const dom = (() => {
             !(
               differenceInDays(
                 parseISO(projects.projectsList[j].tasks[i].schedule),
-                parseISO(currDate)
+                parseISO(currDate),
               ) >= 0 &&
               differenceInDays(
                 parseISO(projects.projectsList[j].tasks[i].schedule),
-                parseISO(currDate)
+                parseISO(currDate),
               ) <= 7
             )
           ) {
@@ -390,7 +393,7 @@ const dom = (() => {
             taskDate.classList.add(
               'todo-item-date',
               'todo-item-pill',
-              'toggle-task'
+              'toggle-task',
             );
             taskDate.textContent = projects.projectsList[j].tasks[i].schedule;
             todoItem.appendChild(taskDate);
@@ -401,7 +404,7 @@ const dom = (() => {
             'todo-item-pill',
             `${projects.projectsList[j].color}-background`,
             'toggle-task',
-            'todo-item-project-name'
+            'todo-item-project-name',
           );
           taskProject.textContent = projects.projectsList[j].title;
           todoItem.appendChild(taskProject);
@@ -411,7 +414,7 @@ const dom = (() => {
             'far',
             'fa-edit',
             'fa-fw',
-            'edit-task-modal'
+            'edit-task-modal',
           );
           todoItem.appendChild(taskEditIcon);
           // Create remove icon
@@ -420,7 +423,7 @@ const dom = (() => {
             'far',
             'fa-trash',
             'fa-fw',
-            'remove-task-modal'
+            'remove-task-modal',
           );
           todoItem.appendChild(taskRemoveIcon);
         }
@@ -448,7 +451,7 @@ const dom = (() => {
         'fa-exclamation-circle',
         'fa-fw',
         'project-red',
-        'add-project-modal'
+        'add-project-modal',
       );
       taskAdd.appendChild(taskAddIcon);
       const taskAddTitle = document.createElement('p');

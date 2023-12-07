@@ -16,7 +16,7 @@ const tasks = (() => {
     title,
     priority = '',
     schedule = '',
-    link = projectIndex
+    link = projectIndex,
   ) {
     const newTask = new Task(title, priority, schedule);
     projects.projectsList[projectIndex].tasks.push(newTask);
@@ -44,7 +44,7 @@ const tasks = (() => {
     title,
     priority,
     schedule,
-    link = projectIndex
+    link = projectIndex,
   ) {
     projects.projectsList[projectIndex].tasks[taskIndex].title = title;
     projects.projectsList[projectIndex].tasks[taskIndex].priority = priority;

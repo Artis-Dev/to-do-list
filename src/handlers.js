@@ -38,7 +38,7 @@ const handlers = (() => {
           e.target.getAttribute('data-index')
             ? e.target.getAttribute('data-index')
             : e.target.parentElement.getAttribute('data-index'),
-          10
+          10,
         );
         link = undefined;
         dom.changeLink(projectIndex);
@@ -50,14 +50,14 @@ const handlers = (() => {
       } else if (e.target.classList.contains('edit-project-modal')) {
         projectIndex = parseInt(
           e.target.parentElement.getAttribute('data-index'),
-          10
+          10,
         );
         dom.showProjectModal('editProject', projectIndex);
         // Remove project modal open
       } else if (e.target.classList.contains('remove-project-modal')) {
         projectIndex = parseInt(
           e.target.parentElement.getAttribute('data-index'),
-          10
+          10,
         );
         dom.showConfirmModal('removeProject', projectIndex);
         // Add task modal open
@@ -66,29 +66,29 @@ const handlers = (() => {
           e.target.parentElement.getAttribute('data-project-index')
             ? e.target.parentElement.getAttribute('data-project-index')
             : e.target.getAttribute('data-project-index'),
-          10
+          10,
         );
         dom.showTaskModal('addTask', projectIndex);
         // Edit task modal open
       } else if (e.target.classList.contains('edit-task-modal')) {
         projectIndex = parseInt(
           e.target.parentElement.getAttribute('data-project-index'),
-          10
+          10,
         );
         taskIndex = parseInt(
           e.target.parentElement.getAttribute('data-task-index'),
-          10
+          10,
         );
         dom.showTaskModal('editTask', projectIndex, taskIndex);
         // Remove task modal open
       } else if (e.target.classList.contains('remove-task-modal')) {
         projectIndex = parseInt(
           e.target.parentElement.getAttribute('data-project-index'),
-          10
+          10,
         );
         taskIndex = parseInt(
           e.target.parentElement.getAttribute('data-task-index'),
-          10
+          10,
         );
         dom.showConfirmModal('removeTask', projectIndex, taskIndex);
         // Close all modals
@@ -121,13 +121,13 @@ const handlers = (() => {
           e.target.getAttribute('data-project-index')
             ? e.target.getAttribute('data-project-index')
             : e.target.parentElement.getAttribute('data-project-index'),
-          10
+          10,
         );
         taskIndex = parseInt(
           e.target.getAttribute('data-task-index')
             ? e.target.getAttribute('data-task-index')
             : e.target.parentElement.getAttribute('data-task-index'),
-          10
+          10,
         );
         tasks.toggleTask(projectIndex, taskIndex, link);
       }

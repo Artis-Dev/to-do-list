@@ -95,10 +95,12 @@ main {
 
 .main-mobile {
   margin-left: 0;
+  min-height: calc(100vh - 60px);
 }
 
 .main-blur {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.25);
+  pointer-events: none;
 }
 
 .todo-header {
